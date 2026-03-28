@@ -18,7 +18,7 @@ export function EarthcodeSection() {
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-20 top-2 z-0 h-[18rem] w-[22rem] rounded-full blur-[70px] md:hidden"
+        className="earthcode-ambient earthcode-ambient-mobile pointer-events-none absolute -right-20 top-2 z-0 h-[18rem] w-[22rem] rounded-full blur-[70px] md:hidden"
         style={{
           background:
             "radial-gradient(ellipse at 48% 40%, rgba(159, 211, 202, 0.42) 0%, rgba(159, 211, 202, 0.26) 38%, rgba(159, 211, 202, 0.1) 60%, rgba(159, 211, 202, 0) 78%)",
@@ -30,7 +30,7 @@ export function EarthcodeSection() {
         initial={{ x: 140, opacity: 0 }}
         animate={isInView ? { x: 0, opacity: 1 } : {}}
         transition={{ duration: 0.9, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute right-[-7rem] top-[-0.5rem] z-0 hidden h-[24rem] w-[46rem] rounded-full blur-[140px] md:block sm:right-[-8rem] sm:top-[-1rem] sm:h-[34rem] sm:w-[64rem] lg:right-[-10rem] lg:top-[-4rem] lg:h-[50rem] lg:w-[94rem] xl:right-[-12rem] xl:top-[-5rem] xl:h-[58rem] xl:w-[108rem]"
+        className="earthcode-ambient earthcode-ambient-desktop earthcode-ambient-desktop-back pointer-events-none absolute right-[-7rem] top-[-0.5rem] z-0 hidden h-[24rem] w-[46rem] rounded-full blur-[140px] md:block sm:right-[-8rem] sm:top-[-1rem] sm:h-[34rem] sm:w-[64rem] lg:right-[-10rem] lg:top-[-4rem] lg:h-[50rem] lg:w-[94rem] xl:right-[-12rem] xl:top-[-5rem] xl:h-[58rem] xl:w-[108rem]"
         style={{
           background:
             "radial-gradient(ellipse at 48% 46%, rgba(159, 211, 202, 0.72) 0%, rgba(159, 211, 202, 0.62) 22%, rgba(159, 211, 202, 0.44) 42%, rgba(159, 211, 202, 0.22) 58%, rgba(159, 211, 202, 0.08) 70%, rgba(159, 211, 202, 0) 82%)",
@@ -42,7 +42,7 @@ export function EarthcodeSection() {
         initial={{ x: 120, y: -24, scale: 0.96, opacity: 0 }}
         animate={isInView ? { x: 0, y: 0, scale: 1, opacity: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute right-[-3rem] top-[-3rem] z-0 hidden h-[28rem] w-[56rem] rounded-full blur-[128px] md:block sm:right-[-4rem] sm:top-[-5rem] sm:h-[40rem] sm:w-[72rem] lg:right-[-5rem] lg:top-[-7rem] lg:h-[58rem] lg:w-[108rem] xl:right-[-6rem] xl:top-[-8rem] xl:h-[68rem] xl:w-[120rem]"
+        className="earthcode-ambient earthcode-ambient-desktop earthcode-ambient-desktop-front pointer-events-none absolute right-[-3rem] top-[-3rem] z-0 hidden h-[28rem] w-[56rem] rounded-full blur-[128px] md:block sm:right-[-4rem] sm:top-[-5rem] sm:h-[40rem] sm:w-[72rem] lg:right-[-5rem] lg:top-[-7rem] lg:h-[58rem] lg:w-[108rem] xl:right-[-6rem] xl:top-[-8rem] xl:h-[68rem] xl:w-[120rem]"
         style={{
           background:
             "radial-gradient(ellipse at 44% 40%, rgba(159, 211, 202, 0.74) 0%, rgba(159, 211, 202, 0.66) 18%, rgba(159, 211, 202, 0.5) 34%, rgba(159, 211, 202, 0.28) 50%, rgba(159, 211, 202, 0.12) 64%, rgba(159, 211, 202, 0.04) 74%, rgba(159, 211, 202, 0) 86%)",
@@ -53,14 +53,14 @@ export function EarthcodeSection() {
         src={earthcodePlanet}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -right-16 top-4 z-[1] w-[19rem] max-w-none mix-blend-multiply saturate-[0.82] opacity-[0.09] md:hidden"
+        className="earthcode-planet earthcode-planet-mobile pointer-events-none absolute -right-16 top-4 z-[1] w-[19rem] max-w-none mix-blend-multiply saturate-[0.82] opacity-[0.09] md:hidden"
       />
 
       <img
         src={earthcodePlanet}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -right-14 -top-9 z-[1] hidden w-[24rem] max-w-none mix-blend-multiply saturate-[0.82] opacity-[0.14] md:block sm:-right-14 sm:-top-11 sm:w-[35rem] lg:-right-24 lg:-top-[9.5rem] lg:w-[58rem] xl:-right-28 xl:-top-[10.5rem] xl:w-[66rem]"
+        className="earthcode-planet earthcode-planet-desktop pointer-events-none absolute -right-14 -top-9 z-[1] hidden w-[24rem] max-w-none mix-blend-multiply saturate-[0.82] opacity-[0.14] md:block sm:-right-14 sm:-top-11 sm:w-[35rem] lg:-right-24 lg:-top-[9.5rem] lg:w-[58rem] xl:-right-28 xl:-top-[10.5rem] xl:w-[66rem]"
       />
 
       <div className="relative z-10 mx-auto mt-0 max-w-7xl md:mt-[-1rem] lg:mt-[-1.5rem]">

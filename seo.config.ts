@@ -118,7 +118,7 @@ const pages: SeoPage[] = [
           {
             title: "Contact",
             body: paragraph(
-              `Email ${anchor("mailto:contact@lampata.com", "contact@lampata.com")} or write to Lampata, Wellington House, East Road, Cambridge, England, CB1 1BH.`,
+              `Email ${anchor("mailto:contact@lampata.co.uk", "contact@lampata.co.uk")} or write to Lampata, Wellington House, East Road, Cambridge, England, CB1 1BH.`,
             ),
           },
         ],
@@ -140,7 +140,7 @@ const pages: SeoPage[] = [
           description: companyDescription,
           logo: logoUrl,
           image: logoUrl,
-          email: "contact@lampata.com",
+          email: "contact@lampata.co.uk",
           foundingDate: "2020",
           identifier: "Company number 12820181",
           address: officeAddress,
@@ -249,7 +249,7 @@ const pages: SeoPage[] = [
           {
             title: "Request training",
             body: paragraph(
-              `Use ${anchor(withBasePath("/training/#request-training", basePath), "the training request form")} or email ${anchor("mailto:contact@lampata.com", "contact@lampata.com")} with your team, goals, and preferred format.`,
+              `Use ${anchor(withBasePath("/training/#request-training", basePath), "the training request form")} or email ${anchor("mailto:contact@lampata.co.uk", "contact@lampata.co.uk")} with your team, goals, and preferred format.`,
             ),
           },
         ],
@@ -670,7 +670,7 @@ See [llms-full.txt](${fullUrl}) for the detailed company and site summary.
 
 ## Contact
 
-- Email: contact@lampata.com
+- Email: contact@lampata.co.uk
 - Office: Wellington House, East Road, Cambridge, England, CB1 1BH
 `;
 }
@@ -747,7 +747,7 @@ The Earth Observation Tech Radar is a Lampata-maintained view of open-source too
 
 ## Contact
 
-- Email: contact@lampata.com
+- Email: contact@lampata.co.uk
 - Privacy email: contact+gdpr@lampata.co.uk
 - Office: Wellington House, East Road, Cambridge, England, CB1 1BH
 - Company number: 12820181

@@ -466,6 +466,37 @@
     pointer-events: none;
   }
 
+  @supports (font: -apple-system-body) and (-webkit-appearance: none) {
+    .earthcode-section {
+      background: #f9fafb;
+    }
+
+    .earthcode-section::before {
+      content: none;
+    }
+
+    .earthcode-section::after {
+      content: none;
+    }
+
+    .earthcode-ambient {
+      display: none !important;
+    }
+
+    .earthcode-planet {
+      mix-blend-mode: normal !important;
+      filter: saturate(0.78);
+    }
+
+    .earthcode-planet-mobile {
+      opacity: 0.08 !important;
+    }
+
+    .earthcode-planet-desktop {
+      opacity: 0.11 !important;
+    }
+  }
+
   .case-studies-reference {
     position: relative;
     overflow: hidden;

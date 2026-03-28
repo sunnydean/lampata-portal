@@ -45,10 +45,10 @@ export function Footer() {
                 Start with a problem statement
               </p>
               <a
-                href="mailto:contact@lampata.com"
+                href="mailto:contact@lampata.co.uk"
                 className="inline-flex items-center gap-2 text-lg text-white transition-colors hover:text-white/80"
               >
-                contact@lampata.com
+                contact@lampata.co.uk
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <p className="mt-4 text-sm leading-6 text-white/50">

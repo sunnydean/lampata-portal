@@ -46,7 +46,7 @@ export function Contact() {
       formData.message || "Not provided",
     ].join("\n");
 
-    window.location.href = `mailto:contact@lampata.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:contact@lampata.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   const mapFallback = (
@@ -120,10 +120,10 @@ export function Contact() {
                     Email
                   </p>
                   <a
-                    href="mailto:contact@lampata.com"
+                    href="mailto:contact@lampata.co.uk"
                     className="mt-1 inline-flex items-center gap-2 text-lg font-semibold text-[#00458b] transition-opacity hover:opacity-72"
                   >
-                    contact@lampata.com
+                    contact@lampata.co.uk
                   </a>
                 </div>
               </div>

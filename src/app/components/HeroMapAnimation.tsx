@@ -1,5 +1,4 @@
 import { motion, useReducedMotion } from "motion/react";
-import { BrandMark } from "./BrandMark";
 import { cn } from "./ui/utils";
 
 interface HeroMapAnimationProps {
@@ -86,8 +85,7 @@ const LINKS = [
 /* ─── Timing ─── */
 const T_FLASH = 3.3;
 const T_DIM = 3.45;
-const T_LOGO = 3.55;
-const T_TAG = 4.05;
+const T_TAG = 3.55;
 const T_IDLE = 4.6;
 
 /* ─── Ambient pulse config ─── */
@@ -308,7 +306,7 @@ export function HeroMapAnimation({
 
       {/* Bottom fade */}
       <motion.div
-        className="absolute inset-x-0 bottom-0 h-[26%] bg-gradient-to-t from-[#eaf2fb]/96 via-white/20 to-transparent"
+        className="absolute inset-x-0 bottom-0 h-[6%] bg-gradient-to-t from-[#eaf2fb]/60 via-white/10 to-transparent"
         initial={intro ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: intro ? T_DIM : 0, ease: EASE }}
@@ -319,7 +317,8 @@ export function HeroMapAnimation({
         aria-hidden="true"
         className="absolute inset-0 h-full w-full"
         focusable="false"
-        viewBox="0 0 720 560"
+        viewBox="0 -50 720 660"
+        preserveAspectRatio="xMidYMid slice"
       >
         <defs>
           <linearGradient id="hma-scan-v" x1="0" y1="0" x2="0" y2="1">
@@ -493,6 +492,114 @@ export function HeroMapAnimation({
             />
           ))}
 
+        {/* CAMBRIDGE label next to bottom-left yellow dot */}
+        <motion.text
+          x="118"
+          y="452"
+          fill={blue(0.5)}
+          fontFamily="ui-monospace, monospace"
+          fontSize="10"
+          letterSpacing="3"
+          initial={intro ? { opacity: 0 } : false}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: intro ? 2.6 : 0, ease: EASE }}
+        >
+          CAMBRIDGE
+        </motion.text>
+
+        {/* Bottom-area content: extra grid, contours, points, links */}
+        {/* Extra horizontal grid lines in bottom zone */}
+        {["M0 500C180 492 360 490 720 502", "M0 540C180 534 360 532 720 542"].map((d, i) => (
+          <motion.path
+            key={`gbh-${i}`}
+            d={d}
+            fill="none"
+            stroke={i === 0 ? blue(0.12) : gold(0.09)}
+            strokeWidth={1}
+            initial={intro ? { pathLength: 0, opacity: 0 } : false}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.35 + i * 0.06, ease: EASE }}
+          />
+        ))}
+
+        {/* Bottom contour cluster */}
+        <motion.path
+          d={ePath(340, 510, 68, 34)}
+          fill="none"
+          stroke={blue(0.22)}
+          strokeWidth={1.2}
+          strokeLinecap="round"
+          initial={intro ? { pathLength: 0, opacity: 0 } : false}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 1.3, delay: 0.75, ease: EASE }}
+        />
+        <motion.path
+          d={ePath(340, 510, 130, 58)}
+          fill="none"
+          stroke={gold(0.16)}
+          strokeWidth={1.2}
+          strokeLinecap="round"
+          initial={intro ? { pathLength: 0, opacity: 0 } : false}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 1.4, delay: 0.9, ease: EASE }}
+        />
+
+        {/* Bottom data points */}
+        {[
+          { x: 240, y: 518, r: 3, alt: true, delay: 2.6 },
+          { x: 440, y: 506, r: 4, alt: false, delay: 2.65 },
+          { x: 160, y: 534, r: 3, alt: false, delay: 2.7 },
+          { x: 560, y: 528, r: 3, alt: true, delay: 2.75 },
+          { x: 340, y: 542, r: 4, alt: true, delay: 2.8 },
+          { x: 650, y: 516, r: 3, alt: false, delay: 2.85 },
+        ].map((p, i) => (
+          <g key={`bpt-${i}`}>
+            <motion.circle
+              cx={p.x}
+              cy={p.y}
+              fill={p.alt ? gold(0.14) : blue(0.1)}
+              stroke={p.alt ? gold(0.28) : blue(0.28)}
+              strokeWidth={1}
+              initial={intro ? { r: 0, opacity: 0 } : false}
+              animate={{ r: p.r + 6, opacity: 1 }}
+              transition={{ duration: 0.45, delay: intro ? p.delay : 0, ease: EASE }}
+            />
+            <motion.circle
+              cx={p.x}
+              cy={p.y}
+              fill={p.alt ? "#f5d704" : "#00458b"}
+              stroke="white"
+              strokeWidth={1.5}
+              initial={intro ? { r: 0, opacity: 0 } : false}
+              animate={{ r: p.r, opacity: 1 }}
+              transition={{ duration: 0.35, delay: intro ? p.delay + 0.05 : 0, ease: EASE }}
+            />
+          </g>
+        ))}
+
+        {/* Bottom network links */}
+        {[
+          { d: "M240 518L440 506", delay: 2.72 },
+          { d: "M160 534L340 542", delay: 2.78 },
+          { d: "M340 542L560 528", delay: 2.84 },
+          { d: "M440 506L650 516", delay: 2.9 },
+          { d: "M98 448L160 534", delay: 2.92 },
+          { d: "M612 468L650 516", delay: 2.96 },
+        ].map((l, i) => (
+          <motion.path
+            key={`bln-${i}`}
+            d={l.d}
+            fill="none"
+            stroke={i % 2 === 0 ? blue(0.3) : gold(0.35)}
+            strokeWidth={1.3}
+            strokeLinecap="round"
+            strokeDasharray={i % 3 === 0 ? "6 8" : undefined}
+            initial={intro ? { pathLength: 0, opacity: 0 } : false}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 0.75, delay: intro ? l.delay : 0, ease: EASE }}
+          />
+        ))}
+
         {/* Post-flash ambient: pulse rings on all data points */}
         {shouldPulse &&
           POINTS.map((p, i) => (
@@ -541,7 +648,7 @@ export function HeroMapAnimation({
             />
           ))}
 
-        {/* Ambient: slow repeating scan sweep */}
+        {/* Ambient: slow repeating vertical scan sweep */}
         {shouldPulse && (
           <motion.rect
             x="0"
@@ -558,10 +665,82 @@ export function HeroMapAnimation({
               duration: 4.5,
               times: [0, 0.05, 0.9, 1],
               repeat: Infinity,
+              repeatDelay: 3,
               ease: "linear",
             }}
           />
         )}
+
+        {/* Ambient: horizontal scan sweep (offset from vertical) */}
+        {shouldPulse && (
+          <motion.rect
+            y="0"
+            height="560"
+            width="4"
+            fill="url(#hma-scan-h)"
+            initial={{ x: 720, opacity: 0 }}
+            animate={{
+              x: [720, 0],
+              opacity: [0, 0.18, 0.18, 0],
+            }}
+            transition={{
+              delay: T_IDLE + 4,
+              duration: 3.8,
+              times: [0, 0.05, 0.9, 1],
+              repeat: Infinity,
+              repeatDelay: 5,
+              ease: "linear",
+            }}
+          />
+        )}
+
+        {/* Ambient: data pulses traveling along network links */}
+        {shouldPulse &&
+          LINKS.map((l, i) => (
+            <motion.path
+              key={`lpulse-${i}`}
+              d={l.d}
+              fill="none"
+              stroke={i % 2 === 0 ? blue(0.5) : gold(0.55)}
+              strokeWidth={2.2}
+              strokeLinecap="round"
+              initial={{ pathLength: 0, pathOffset: 0, opacity: 0 }}
+              animate={{
+                pathLength: [0, 0.3, 0],
+                pathOffset: [0, 0.7, 1],
+                opacity: [0, 0.6, 0],
+              }}
+              transition={{
+                delay: T_IDLE + 2 + i * 0.8,
+                duration: 2,
+                repeat: Infinity,
+                repeatDelay: 6,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+
+        {/* Ambient: contour ring breathing */}
+        {shouldPulse &&
+          [0, 2].map((ci) => (
+            <motion.path
+              key={`cbreathe-${ci}`}
+              d={CONTOURS[ci].d}
+              fill="none"
+              stroke={ci === 0 ? gold(0.25) : blue(0.2)}
+              strokeWidth={1.8}
+              strokeLinecap="round"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.4, 0] }}
+              transition={{
+                delay: T_IDLE + 1.5 + ci * 2,
+                duration: 4,
+                repeat: Infinity,
+                repeatDelay: 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
 
         {/* Flash overlay */}
         {intro && (
@@ -602,37 +781,24 @@ export function HeroMapAnimation({
 
       <div className="hero-map-vignette absolute inset-0" />
 
-      {/* Logo reveal */}
+      {/* Tagline — centered in sleek box */}
       <motion.div
         className="absolute inset-0 z-30 flex items-center justify-center px-8"
-        initial={intro ? { opacity: 0, scale: 1.06 } : false}
+        initial={intro ? { opacity: 0, scale: 1.04 } : false}
         animate={{ opacity: 1, scale: 1 }}
         transition={{
-          delay: intro ? T_LOGO : 0,
+          delay: intro ? T_TAG : 0,
           duration: 0.8,
           ease: [0.16, 1, 0.3, 1],
         }}
       >
-        <div className="hero-map-logo-shell w-full max-w-[22rem] px-7 py-5">
-          <BrandMark className="mx-auto max-w-[18.5rem] lg:max-w-[19.5rem]" />
+        <div className="hero-map-logo-shell max-w-[20rem] px-7 py-4 text-center">
+          <p className="font-display text-[1.48rem] font-bold uppercase leading-tight tracking-[0.14em] text-[#00458b] sm:text-[1.6rem] md:text-[1.52rem]">
+            Making Sense of the Real World
+          </p>
         </div>
       </motion.div>
 
-      {/* Tagline */}
-      <motion.div
-        className="absolute inset-x-0 bottom-[7%] z-20 flex justify-center px-5"
-        initial={intro ? { opacity: 0, y: 12 } : false}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: intro ? T_TAG : 0.08,
-          duration: 0.7,
-          ease: EASE,
-        }}
-      >
-        <p className="font-display text-[1.24rem] font-semibold tracking-[-0.04em] text-[#00458b] [text-shadow:0_1px_0_rgba(255,255,255,0.75)] sm:text-[1.48rem] md:text-[1.36rem]">
-          Making sense of the real world
-        </p>
-      </motion.div>
     </div>
   );
 }

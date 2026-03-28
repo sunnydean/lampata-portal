@@ -67,7 +67,7 @@ export default function TrainingApp() {
       formData.goals || "Not provided",
     ].join("\n");
 
-    window.location.href = `mailto:contact@lampata.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:contact@lampata.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   return (
@@ -445,10 +445,10 @@ export default function TrainingApp() {
                 </div>
 
                 <a
-                  href="mailto:contact@lampata.com"
+                  href="mailto:contact@lampata.co.uk"
                   className="mt-8 inline-flex items-center gap-2 text-lg font-semibold text-[#00458b] transition-opacity hover:opacity-72"
                 >
-                  contact@lampata.com
+                  contact@lampata.co.uk
                   <ExternalLink className="h-4 w-4" />
                 </a>
               </div>
