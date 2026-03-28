@@ -34,7 +34,7 @@ export function AudienceSection() {
                   <p className="mt-5 max-w-lg text-sm leading-7 text-[#00458b]/76">
                   We are a research organisation that publishes in open journals and conferences, contributes to open source software, and shares our work through public talks and workshops.
                   </p>
-                  <p className="mt-5 max-w-lg text-sm text-[#00458b]/76">
+                  <p className="mt-5 max-w-lg text-sm leading-7 text-[#00458b]/76">
                   We use our research and engineering expertise to help build custom specialised software for our clients without zero vendor lock-in.
                   </p>
                 </div>

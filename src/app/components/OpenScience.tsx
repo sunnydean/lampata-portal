@@ -167,7 +167,7 @@ export function OpenScience() {
           >
             <p className="section-eyebrow mb-5">Where this shows up</p>
             <h3 className="font-display text-2xl leading-tight tracking-[-0.06em] text-[#00458b]">
-              Open-science delivery that lands in real programmes, institutions, and operational teams.
+              Bridging the gap between research and business applications.
             </h3>
             <span className="yellow-rule mt-4 w-12" />
 
@@ -179,7 +179,7 @@ export function OpenScience() {
 
             <div className="mt-5 grow space-y-2 md:mt-6">
               {[
-                "Operational earth observation workflows and analyst tooling",
+                "Operational GIS workflows and analyst tooling",
                 "Reusable research methods and FAIR publishing patterns",
                 "Sustainability, mobility, and built-environment analysis",
                 "Prototype-to-production paths with documented handoff",

@@ -403,13 +403,13 @@ export const whoWeArePillars: WhoWeArePillar[] = [
   {
     title: "Open geospatial transformation",
     description:
-      "Move away from legacy proprietary geospatial software toward the cutting edge, open source, interoperable tooling where your team owns the workflows, infrastructure, and applications end to end.",
+      "Move away from legacy proprietary geospatial software toward the cutting edge, open source, interoperable tooling where you own your IP.",
     details: ["Own your stack", "Open-source migration", "Infrastructure to apps"],
   },
   {
     title: "Research, Development and Innovation",
     description:
-      "Turn hard geo-spatial questions into practical research programmes, prototypes, and methods that can lead to papers, platforms, and production delivery.",
+      "Turn hard geo-spatial questions into practical research, prototypes, and methods that can lead to papers, platforms, and production delivery.",
     details: ["Applied R&D", "Prototype to product", "Research-grade methods"],
   },
   {
@@ -421,7 +421,7 @@ export const whoWeArePillars: WhoWeArePillar[] = [
   {
     title: "Data Engineering and Stewardship",
     description:
-      "Design the data strategy and quality maintenance plan, architecture, pipelines, and roadmap needed to build your own geo-spatial applications, internal platforms, and decision-ready products.",
+      "Design the data strategy and quality maintenance plan, architecture, pipelines, and roadmap needed for decision-ready products.",
     details: ["Data strategy", "Geo-spatial applications", "Production pipelines"],
   },
 ];
@@ -1021,7 +1021,7 @@ export const earthcodeSection: EarthcodeSectionContent = {
   description:
     "Historically, Earth Observation (EO) research has been closed and complex. EarthCODE is the European Space Agency's open-science mission to change that, making EO research open, FAIR, and accessible to everyone.",
   leadership:
-    "Lampata is proud to be a leading part of this mission. By building tools to make FAIR Earth Sciences easy, providing data stewardship, and working with scientists to create and adopt best practices for data and code quality, we are actively turning the open-science ambition into reality.",
+    "Lampata is proud to be a leading part of this mission by building tools to make FAIR Earth Sciences easy, data stewardship, and working with scientists to create and adopt best practices for data and code quality.",
 };
 
 export const privacyNoticeContent: PrivacyNoticeContent = {
