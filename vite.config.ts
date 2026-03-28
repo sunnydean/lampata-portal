@@ -16,6 +16,10 @@ import {
 } from "./seo.config";
 
 function copyDirectory(sourceDir: string, destinationDir: string) {
+  if (!fs.existsSync(sourceDir)) {
+    return false;
+  }
+
   fs.mkdirSync(destinationDir, { recursive: true });
 
   fs.cpSync(sourceDir, destinationDir, {
@@ -23,6 +27,8 @@ function copyDirectory(sourceDir: string, destinationDir: string) {
     force: true,
     filter: (sourcePath) => !sourcePath.includes(`${path.sep}.git`) && !sourcePath.includes(`${path.sep}.github`),
   });
+
+  return true;
 }
 
 function normalizeBasePath(basePath?: string) {
@@ -131,7 +137,13 @@ export default defineConfig(() => {
           const sourceDir = path.resolve(__dirname, "space-tech-radar");
           const destinationDir = path.resolve(__dirname, "dist/space-tech-radar");
 
-          copyDirectory(sourceDir, destinationDir);
+          const copied = copyDirectory(sourceDir, destinationDir);
+
+          if (!copied) {
+            console.warn(
+              `[copy-space-tech-radar] Skipping optional radar bundle because "${sourceDir}" was not found.`,
+            );
+          }
         },
       },
     ],
