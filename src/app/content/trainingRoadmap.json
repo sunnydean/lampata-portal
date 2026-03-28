@@ -1,0 +1,622 @@
+{
+  "center": {
+    "id": "cloud-native-geospatial",
+    "label": "Cloud-native geospatial",
+    "summary": "A question-first roadmap built from the local SDS course, moving from setup and spatial fundamentals into modelling and raster-vector analysis. Lampata cloud-native additions appear only as secondary extension tools."
+  },
+  "questions": [
+    {
+      "id": "how-do-i-work-in-the-course-environment",
+      "label": "How do I work in the course environment?",
+      "summary": "The course starts with the practical environment: terminal basics, a reproducible Python stack, and notebook-based work in Jupyter Lab.",
+      "source": "sds/course_information/infrastructure.qmd",
+      "subtopics": [
+        {
+          "id": "terminal-and-navigation",
+          "label": "Terminal and navigation",
+          "summary": "Students learn to move through folders, inspect files, and run the commands needed to launch the course workflow.",
+          "source": "sds/introduction/hands_on.qmd",
+          "technologyIds": ["shell"]
+        },
+        {
+          "id": "jupyter-lab-and-notebooks",
+          "label": "Jupyter Lab and notebooks",
+          "summary": "The core teaching format is notebook-first: code, text, outputs, and markdown in one place.",
+          "source": "sds/introduction/hands_on.qmd",
+          "technologyIds": ["jupyterlab"]
+        },
+        {
+          "id": "reproducible-python-environment",
+          "label": "Reproducible Python environment",
+          "summary": "The course environment is installed with Pixi and documented with a conda fallback, so the stack can be recreated consistently.",
+          "source": "sds/course_information/infrastructure.qmd",
+          "technologyIds": ["pixi"]
+        }
+      ]
+    },
+    {
+      "id": "what-is-a-projection",
+      "label": "What is a projection?",
+      "summary": "A projection turns locations on the earth into coordinates on a flat surface, which is why distance, area, and overlay only make sense in the right CRS.",
+      "source": "sds/geographic_data/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "crs",
+          "label": "CRS",
+          "summary": "Coordinate reference systems define how geometry is located, measured, and transformed.",
+          "source": "sds/geographic_data/hands_on.qmd",
+          "technologyIds": ["pyproj"]
+        },
+        {
+          "id": "projected-vs-geographic",
+          "label": "Projected vs geographic coordinates",
+          "summary": "Longitude and latitude are not interchangeable with planar x and y, so measurements and joins need the correct CRS.",
+          "source": "sds/geographic_data/hands_on.qmd",
+          "technologyIds": ["geopandas"]
+        },
+        {
+          "id": "measurement-and-reprojection",
+          "label": "Measurement and reprojection",
+          "summary": "Area, distance, and buffering only become meaningful once data is reprojected into an appropriate analysis CRS.",
+          "source": "sds/geographic_data/hands_on.qmd",
+          "technologyIds": ["pyproj"]
+        }
+      ]
+    },
+    {
+      "id": "raster-or-vector",
+      "label": "Raster or vector?",
+      "summary": "Some questions are about discrete features and boundaries, while others are about grids, surfaces, and cell values.",
+      "source": "sds/geographic_data/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "feature-geometry",
+          "label": "Feature geometry",
+          "summary": "Points, lines, and polygons are explicit geometries with attributes and boundaries.",
+          "source": "sds/geographic_data/hands_on.qmd",
+          "technologyIds": ["geopandas"]
+        },
+        {
+          "id": "cells-resolution-and-extent",
+          "label": "Cells, resolution, and extent",
+          "summary": "Raster data stores values on a grid, so cell size and extent control what can be seen and compared.",
+          "source": "sds/raster_data/hands_on.qmd",
+          "technologyIds": ["rasterio"]
+        },
+        {
+          "id": "choosing-the-right-representation",
+          "label": "Choosing the right representation",
+          "summary": "The data model should follow the question: vector for bounded objects, raster for continuous surfaces and dense measurements.",
+          "source": "sds/geographic_data/hands_on.qmd",
+          "technologyIds": ["pyogrio", "xarray"]
+        }
+      ]
+    },
+    {
+      "id": "how-do-cloud-native-geospatial-workflows-run-on-azure",
+      "label": "How do cloud-native geospatial workflows run on Azure?",
+      "summary": "This extension module adds the cloud layer: storing geospatial assets in object storage, packaging analysis, and delivering managed workflows on Azure.",
+      "subtopics": [
+        {
+          "id": "object-storage-and-remote-assets",
+          "label": "Object storage and remote assets",
+          "summary": "Cloud-native raster and vector workflows start with assets that live in object storage and can be read without pulling everything down locally.",
+          "technologyIds": ["azure-blob-storage", "cog"]
+        },
+        {
+          "id": "chunked-compute-and-scheduled-jobs",
+          "label": "Chunked compute and scheduled jobs",
+          "summary": "Once data is remote, scheduled execution and managed containers become the practical way to run larger analyses repeatedly.",
+          "technologyIds": ["azure-container-apps", "azure-functions"]
+        },
+        {
+          "id": "apis-and-analysis-products",
+          "label": "APIs and analysis products",
+          "summary": "The final step is turning outputs into shareable assets, vector tables, or lightweight services that fit a cloud delivery workflow.",
+          "technologyIds": ["geoparquet"]
+        }
+      ]
+    },
+    {
+      "id": "how-do-spatial-relationships-work",
+      "label": "How do spatial relationships work?",
+      "summary": "Spatial analysis encodes adjacency, overlap, and neighborhood structure rather than treating each record as an isolated row.",
+      "source": "sds/spatial_graphs/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "contiguity-and-neighbors",
+          "label": "Contiguity and neighbors",
+          "summary": "Queen and rook relationships turn shared boundaries into explicit neighborhood definitions.",
+          "source": "sds/spatial_graphs/hands_on.qmd",
+          "technologyIds": ["libpysal"]
+        },
+        {
+          "id": "joins-buffers-and-overlays",
+          "label": "Joins, buffers, and overlays",
+          "summary": "Spatial joins, buffers, and overlays connect features by where they intersect, touch, or contain one another.",
+          "source": "sds/geographic_data/hands_on.qmd",
+          "technologyIds": ["shapely"]
+        },
+        {
+          "id": "graph-structure",
+          "label": "Graph structure",
+          "summary": "A spatial graph is the formal structure that stores who is linked to whom and how strongly.",
+          "source": "sds/spatial_graphs/hands_on.qmd",
+          "technologyIds": ["libpysal"]
+        }
+      ]
+    },
+    {
+      "id": "why-does-autocorrelation-matter",
+      "label": "Why does autocorrelation matter?",
+      "summary": "Nearby places often behave similarly, so spatial randomness is the exception rather than the default.",
+      "source": "sds/autocorrelation/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "spatial-lag",
+          "label": "Spatial lag",
+          "summary": "Spatial lag summarizes the values around each observation using a neighborhood graph.",
+          "source": "sds/autocorrelation/hands_on.qmd",
+          "technologyIds": ["libpysal"]
+        },
+        {
+          "id": "global-autocorrelation",
+          "label": "Global autocorrelation",
+          "summary": "Global statistics test whether the whole map looks more clustered or dispersed than chance would suggest.",
+          "source": "sds/autocorrelation/hands_on.qmd",
+          "technologyIds": ["esda"]
+        },
+        {
+          "id": "local-clusters-and-outliers",
+          "label": "Local clusters and outliers",
+          "summary": "Local indicators show where hot spots, cold spots, and spatial outliers depart from the broader pattern.",
+          "source": "sds/autocorrelation/hands_on.qmd",
+          "technologyIds": ["geopandas"]
+        }
+      ]
+    },
+    {
+      "id": "how-do-points-form-patterns",
+      "label": "How do points form patterns?",
+      "summary": "Point data is about events, density, and spatial arrangement, not just isolated coordinates on a map.",
+      "source": "sds/point_patterns/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "density-and-hotspots",
+          "label": "Density and hotspots",
+          "summary": "Hexbinning and density estimation reveal where events accumulate instead of showing every point one by one.",
+          "source": "sds/point_patterns/hands_on.qmd",
+          "technologyIds": ["h3-py", "pointpats"]
+        },
+        {
+          "id": "centrography",
+          "label": "Centrography",
+          "summary": "Mean centers, medians, and ellipses summarize the tendency and spread of an entire point pattern.",
+          "source": "sds/point_patterns/hands_on.qmd",
+          "technologyIds": ["pointpats"]
+        },
+        {
+          "id": "event-clustering",
+          "label": "Event clustering",
+          "summary": "Point patterns can also be grouped into clusters that help describe recurring spatial structure.",
+          "source": "sds/point_patterns/hands_on.qmd",
+          "technologyIds": ["pointpats", "scikit-learn"]
+        }
+      ]
+    },
+    {
+      "id": "how-do-we-group-similar-places",
+      "label": "How do we group similar places?",
+      "summary": "Clustering reduces several variables into a smaller set of interpretable area types or regions.",
+      "source": "sds/clustering/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "multivariate-attributes",
+          "label": "Multivariate attributes",
+          "summary": "Clustering starts with several variables that describe each area, not a single metric.",
+          "source": "sds/clustering/hands_on.qmd",
+          "technologyIds": ["pandas"]
+        },
+        {
+          "id": "kmeans-clustering",
+          "label": "K-means clustering",
+          "summary": "K-means groups observations into a chosen number of clusters based on attribute similarity.",
+          "source": "sds/clustering/hands_on.qmd",
+          "technologyIds": ["scikit-learn"]
+        },
+        {
+          "id": "regionalisation",
+          "label": "Regionalisation",
+          "summary": "Regionalisation adds spatial constraints so neighboring areas stay together when forming regions.",
+          "source": "sds/clustering/hands_on.qmd",
+          "technologyIds": ["libpysal"]
+        }
+      ]
+    },
+    {
+      "id": "how-do-we-estimate-across-space",
+      "label": "How do we estimate across space?",
+      "summary": "Interpolation redistributes or predicts values across space, but each method carries assumptions about what the data represents.",
+      "source": "sds/interpolation/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "areal-interpolation",
+          "label": "Areal interpolation",
+          "summary": "Area-weighted and pycnophylactic methods move values from one set of polygons to another based on overlap and smoothing assumptions.",
+          "source": "sds/interpolation/hands_on.qmd",
+          "technologyIds": ["tobler"]
+        },
+        {
+          "id": "point-interpolation",
+          "label": "Point interpolation",
+          "summary": "Interpolation from sparse points estimates values at new locations or across a surface.",
+          "source": "sds/interpolation/hands_on.qmd",
+          "technologyIds": ["pyinterpolate"]
+        },
+        {
+          "id": "estimation-assumptions",
+          "label": "Estimation assumptions",
+          "summary": "Support, smoothing, neighborhood choice, and target geometry all shape whether an interpolated result is credible.",
+          "source": "sds/interpolation/hands_on.qmd",
+          "technologyIds": ["h3-py"]
+        }
+      ]
+    },
+    {
+      "id": "how-do-we-explain-variation-with-regression",
+      "label": "How do we explain variation with regression?",
+      "summary": "The regression chapter moves from baseline OLS into spatial residual structure, heterogeneity, and geographically weighted regression.",
+      "source": "sds/regression/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "ols-models",
+          "label": "OLS models",
+          "summary": "The course starts with non-spatial linear regression as the baseline for explaining geographic variation.",
+          "source": "sds/regression/hands_on.qmd",
+          "technologyIds": ["statsmodels"]
+        },
+        {
+          "id": "residual-structure",
+          "label": "Residual structure",
+          "summary": "Residual maps and Moran-style diagnostics expose the spatial structure that a simple regression still misses.",
+          "source": "sds/regression/hands_on.qmd",
+          "technologyIds": ["esda"]
+        },
+        {
+          "id": "spatial-heterogeneity-and-gwr",
+          "label": "Spatial heterogeneity and GWR",
+          "summary": "Spatial fixed effects and geographically weighted regression show how relationships vary across space.",
+          "source": "sds/regression/hands_on.qmd",
+          "technologyIds": ["mgwr"]
+        }
+      ]
+    },
+    {
+      "id": "how-do-we-evaluate-spatial-models",
+      "label": "How do we evaluate spatial models?",
+      "summary": "The tree-regression chapter is really about evaluation: train-test splits, overfitting, cross-validated prediction, residual maps, and spatial leakage.",
+      "source": "sds/tree_regression/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "train-test-and-overfitting",
+          "label": "Train-test split and overfitting",
+          "summary": "The course compares linear and random-forest models, checks train versus test scores, and tunes hyperparameters to reduce overfitting.",
+          "source": "sds/tree_regression/hands_on.qmd",
+          "technologyIds": ["scikit-learn"]
+        },
+        {
+          "id": "cross-validated-prediction",
+          "label": "Cross-validated prediction and residuals",
+          "summary": "Cross-validated prediction makes full-map residual analysis possible without training on the same observations being evaluated.",
+          "source": "sds/tree_regression/hands_on.qmd",
+          "technologyIds": ["geopandas"]
+        },
+        {
+          "id": "spatial-leakage-and-comparison",
+          "label": "Spatial leakage and model comparison",
+          "summary": "Spatially stratified metrics, dependency of error, spatial cross-validation, and model comparison are treated as core evaluation practice.",
+          "source": "sds/tree_regression/hands_on.qmd",
+          "technologyIds": ["libpysal"]
+        }
+      ]
+    },
+    {
+      "id": "how-do-we-classify-places-in-space",
+      "label": "How do we classify places in space?",
+      "summary": "The classification chapter adds categorical prediction, spatial cross-validation, and spatial feature engineering to the workflow.",
+      "source": "sds/classification/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "random-forest-classifier",
+          "label": "Random forest classifier",
+          "summary": "Classification starts with a baseline random-forest model and moves through class predictions, probabilities, and accuracy metrics.",
+          "source": "sds/classification/hands_on.qmd",
+          "technologyIds": ["scikit-learn"]
+        },
+        {
+          "id": "spatial-cross-validation",
+          "label": "Spatial cross-validation",
+          "summary": "The course shows why ordinary validation is not enough when neighbouring observations leak information across folds.",
+          "source": "sds/classification/hands_on.qmd",
+          "technologyIds": ["libpysal"]
+        },
+        {
+          "id": "feature-engineering",
+          "label": "Feature engineering",
+          "summary": "Map synthesis, proximity variables, spatially lagged features, and x-y coordinates strengthen classification in space.",
+          "source": "sds/classification/hands_on.qmd",
+          "technologyIds": ["shapely"]
+        }
+      ]
+    },
+    {
+      "id": "how-do-rasters-represent-the-world-and-connect-back-to-vectors",
+      "label": "How do rasters represent the world and connect back to vectors?",
+      "summary": "The raster chapter treats grids as labelled arrays, then shows how rasters can be clipped, resampled, extracted, and summarized back into vector analysis.",
+      "source": "sds/raster_data/hands_on.qmd",
+      "subtopics": [
+        {
+          "id": "arrays-and-raster-metadata",
+          "label": "Arrays and raster metadata",
+          "summary": "Rasters are handled as labelled arrays with bounds, CRS, nodata, bands, and file structure that matter analytically.",
+          "source": "sds/raster_data/hands_on.qmd",
+          "technologyIds": ["xarray", "rasterio"]
+        },
+        {
+          "id": "clipping-resampling-and-remote-rasters",
+          "label": "Clipping, resampling, and remote rasters",
+          "summary": "Large rasters become practical when they are clipped to an area of interest and resampled to a sensible display or processing scale.",
+          "source": "sds/raster_data/hands_on.qmd",
+          "technologyIds": ["rioxarray", "dask", "stac"]
+        },
+        {
+          "id": "extraction-and-zonal-statistics",
+          "label": "Extraction and zonal statistics",
+          "summary": "The chapter finishes by extracting values at points, computing zonal statistics over polygons, and turning raster cubes back into vector-friendly tables.",
+          "source": "sds/raster_data/hands_on.qmd",
+          "technologyIds": ["xvec", "geocube", "duckdb"]
+        }
+      ]
+    }
+  ],
+  "technologies": [
+    {
+      "id": "shell",
+      "label": "Shell",
+      "summary": "The course begins in the terminal, using shell commands to navigate folders and launch the notebook workflow.",
+      "origin": "sds",
+      "source": "https://www.gnu.org/software/bash/manual/"
+    },
+    {
+      "id": "pixi",
+      "label": "Pixi",
+      "summary": "Sets up the reproducible Python environment used throughout the course.",
+      "origin": "sds",
+      "source": "https://pixi.sh/latest/"
+    },
+    {
+      "id": "jupyterlab",
+      "label": "JupyterLab",
+      "summary": "The primary notebook environment used for the hands-on parts of the course.",
+      "origin": "sds",
+      "source": "https://jupyterlab.readthedocs.io/en/stable/"
+    },
+    {
+      "id": "pyproj",
+      "label": "pyproj",
+      "summary": "Inspect and transform coordinate reference systems in Python.",
+      "origin": "sds",
+      "source": "https://pyproj4.github.io/pyproj/stable/"
+    },
+    {
+      "id": "geopandas",
+      "label": "GeoPandas",
+      "summary": "The main Python workhorse for vector geometry, spatial tables, and CRS-aware analysis.",
+      "origin": "sds",
+      "source": "https://geopandas.org/en/stable/"
+    },
+    {
+      "id": "pyogrio",
+      "label": "pyogrio",
+      "summary": "Fast vector IO used in practical GeoPandas workflows.",
+      "origin": "sds",
+      "source": "https://pyogrio.readthedocs.io/en/latest/"
+    },
+    {
+      "id": "shapely",
+      "label": "Shapely",
+      "summary": "Core geometry operations such as buffers, intersections, validity checks, and centroids.",
+      "origin": "sds",
+      "source": "https://shapely.readthedocs.io/en/stable/"
+    },
+    {
+      "id": "libpysal",
+      "label": "libpysal",
+      "summary": "Build spatial graphs, neighborhood structures, and weights matrices.",
+      "origin": "sds",
+      "source": "https://pysal.org/libpysal/"
+    },
+    {
+      "id": "esda",
+      "label": "esda",
+      "summary": "Compute global and local spatial autocorrelation statistics.",
+      "origin": "sds",
+      "source": "https://pysal.org/esda/"
+    },
+    {
+      "id": "pandas",
+      "label": "pandas",
+      "summary": "Prepares attribute tables and feature matrices before clustering and modelling.",
+      "origin": "sds",
+      "source": "https://pandas.pydata.org/docs/"
+    },
+    {
+      "id": "pointpats",
+      "label": "pointpats",
+      "summary": "Analyze point density, centrography, and point pattern structure.",
+      "origin": "sds",
+      "source": "https://pysal.org/pointpats/"
+    },
+    {
+      "id": "h3-py",
+      "label": "h3-py",
+      "summary": "Supports hexagonal grids and target geometries used in point-pattern and interpolation exercises.",
+      "origin": "sds",
+      "source": "https://uber.github.io/h3-py/"
+    },
+    {
+      "id": "contextily",
+      "label": "contextily",
+      "summary": "Add basemap context to static spatial plots.",
+      "origin": "sds",
+      "source": "https://contextily.readthedocs.io/"
+    },
+    {
+      "id": "tobler",
+      "label": "tobler",
+      "summary": "Supports areal interpolation and related spatial estimation workflows.",
+      "origin": "sds",
+      "source": "https://pysal.org/tobler/"
+    },
+    {
+      "id": "pyinterpolate",
+      "label": "pyinterpolate",
+      "summary": "Dedicated interpolation tooling for estimating values across space.",
+      "origin": "sds",
+      "source": "https://pyinterpolate.readthedocs.io/en/stable/"
+    },
+    {
+      "id": "statsmodels",
+      "label": "statsmodels",
+      "summary": "Provides the formula-based OLS workflow used in the regression chapter.",
+      "origin": "sds",
+      "source": "https://www.statsmodels.org/stable/"
+    },
+    {
+      "id": "mgwr",
+      "label": "mgwr",
+      "summary": "Supports geographically weighted regression and related local modelling.",
+      "origin": "sds",
+      "source": "https://mgwr.readthedocs.io/en/latest/"
+    },
+    {
+      "id": "scikit-learn",
+      "label": "scikit-learn",
+      "summary": "Provides clustering, supervised learning, metrics, and validation across the later course chapters.",
+      "origin": "sds",
+      "source": "https://scikit-learn.org/stable/"
+    },
+    {
+      "id": "xarray",
+      "label": "xarray",
+      "summary": "Treat raster and gridded data as labelled arrays with named dimensions.",
+      "origin": "sds",
+      "source": "https://docs.xarray.dev/en/stable/"
+    },
+    {
+      "id": "rioxarray",
+      "label": "rioxarray",
+      "summary": "Adds geospatial raster IO and a rio accessor to xarray objects.",
+      "origin": "sds",
+      "source": "https://corteva.github.io/rioxarray/stable/"
+    },
+    {
+      "id": "rasterio",
+      "label": "rasterio",
+      "summary": "Handles raster metadata, file access, masking, and grid-level properties.",
+      "origin": "sds",
+      "source": "https://rasterio.readthedocs.io/en/stable/"
+    },
+    {
+      "id": "datashader",
+      "label": "datashader",
+      "summary": "Resamples large rasters for screen-scale visualization without plotting every original cell.",
+      "origin": "sds",
+      "source": "https://datashader.org/"
+    },
+    {
+      "id": "geocube",
+      "label": "geocube",
+      "summary": "Bridges raster and vector workflows for extraction and zonal statistics.",
+      "origin": "sds",
+      "source": "https://corteva.github.io/geocube/stable/"
+    },
+    {
+      "id": "xvec",
+      "label": "xvec",
+      "summary": "Links raster-style arrays back to points, polygons, and geospatial tables.",
+      "origin": "sds",
+      "source": "https://xvec.readthedocs.io/"
+    },
+    {
+      "id": "osmnx",
+      "label": "osmnx",
+      "summary": "Supplies boundary and network context used in the raster-vector part of the course.",
+      "origin": "sds",
+      "source": "https://osmnx.readthedocs.io/en/stable/"
+    },
+    {
+      "id": "stac",
+      "label": "STAC",
+      "summary": "Lampata extension: query large remote imagery collections without treating discovery as a manual step.",
+      "origin": "extension",
+      "source": "https://stacspec.org/en/"
+    },
+    {
+      "id": "cog",
+      "label": "COG",
+      "summary": "Lampata extension: use cloud-optimized GeoTIFF layouts for efficient remote access.",
+      "origin": "extension",
+      "source": "https://gdal.org/en/stable/drivers/raster/cog.html"
+    },
+    {
+      "id": "aws-s3",
+      "label": "AWS S3",
+      "summary": "Lampata extension: object storage pattern for hosted raster assets and cloud-native delivery.",
+      "origin": "extension",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"
+    },
+    {
+      "id": "dask",
+      "label": "Dask",
+      "summary": "Lampata extension: chunked and lazy computation for larger raster workflows than the core SDS material emphasizes.",
+      "origin": "extension",
+      "source": "https://docs.dask.org/en/stable/"
+    },
+    {
+      "id": "geoparquet",
+      "label": "GeoParquet",
+      "summary": "Lampata extension: portable geospatial columnar storage for vector outputs and derived tables.",
+      "origin": "extension",
+      "source": "https://geoparquet.org/"
+    },
+    {
+      "id": "duckdb",
+      "label": "DuckDB",
+      "summary": "Lampata extension: lightweight analytical querying for raster-derived tables and vector outputs.",
+      "origin": "extension",
+      "source": "https://duckdb.org/docs/stable/"
+    },
+    {
+      "id": "azure-blob-storage",
+      "label": "Azure Blob Storage",
+      "summary": "Lampata extension: object storage for cloud-hosted rasters, derived tables, and other geospatial assets.",
+      "origin": "extension",
+      "source": "https://learn.microsoft.com/en-us/azure/storage/blobs/"
+    },
+    {
+      "id": "azure-container-apps",
+      "label": "Azure Container Apps",
+      "summary": "Lampata extension: managed container runtime for packaging geospatial APIs, scheduled jobs, and internal services.",
+      "origin": "extension",
+      "source": "https://learn.microsoft.com/en-us/azure/container-apps/"
+    },
+    {
+      "id": "azure-functions",
+      "label": "Azure Functions",
+      "summary": "Lampata extension: event-driven or scheduled execution for small geospatial processing steps and automation hooks.",
+      "origin": "extension",
+      "source": "https://learn.microsoft.com/en-us/azure/azure-functions/"
+    }
+  ]
+}

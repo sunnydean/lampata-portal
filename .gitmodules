@@ -1,0 +1,3 @@
+[submodule "space-tech-radar"]
+	path = space-tech-radar
+	url = https://github.com/sunnydean/space-tech-radar.git
