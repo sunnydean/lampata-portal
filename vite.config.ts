@@ -40,7 +40,7 @@ function normalizeBasePath(basePath?: string) {
   return `/${trimmed}/`;
 }
 
-function getBuildBasePath() {
+function getBuildBasePath(siteUrl?: string) {
   const explicitBasePath = process.env.VITE_BASE_PATH || process.env.BASE_PATH;
 
   if (explicitBasePath) {
@@ -50,6 +50,12 @@ function getBuildBasePath() {
   if (process.env.GITHUB_PAGES === "true") {
     const repository = process.env.GITHUB_REPOSITORY?.split("/")[1];
     const owner = process.env.GITHUB_REPOSITORY_OWNER;
+    const siteHostname = siteUrl ? new URL(siteUrl).hostname : null;
+    const githubPagesHostname = owner ? `${owner}.github.io` : null;
+
+    if (siteHostname && githubPagesHostname && siteHostname !== githubPagesHostname) {
+      return "/";
+    }
 
     if (repository && owner && repository !== `${owner}.github.io`) {
       return `/${repository}/`;
@@ -60,8 +66,8 @@ function getBuildBasePath() {
 }
 
 export default defineConfig(() => {
-  const basePath = getBuildBasePath();
   const siteUrl = getSiteUrl(process.env.VITE_SITE_URL || process.env.SITE_URL);
+  const basePath = getBuildBasePath(siteUrl);
   const seoContext = {
     siteUrl,
     basePath,

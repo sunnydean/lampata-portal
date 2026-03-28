@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAGES: "true"
+      SITE_URL: "https://lampata.co.uk"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
