@@ -377,7 +377,7 @@
   }
 
   .animated-headline-word {
-    animation: headline-word-in 180ms cubic-bezier(0.28, 0.92, 0.36, 1) both;
+    animation: headline-word-in 420ms cubic-bezier(0.22, 0.9, 0.32, 1) both;
   }
 
   @keyframes headline-word-in {
