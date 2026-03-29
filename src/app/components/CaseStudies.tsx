@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "../content/siteContent";
-import antarcticaImg from "@/assets/antarctica.png";
+import antarcticaImg800 from "@/assets/antarctica-800.webp";
+import antarcticaImg1200 from "@/assets/antarctica-1200.webp";
 
 function OGCVisual({ badge, metric }: { badge: string; metric: string }) {
   return (
@@ -213,14 +214,18 @@ function UrbanVisual({ badge, metric }: { badge: string; metric: string }) {
 
 function AntarcticaVisual({ badge, metric }: { badge: string; metric: string }) {
   return (
-    <div
-      className="cs-visual"
-      style={{
-        backgroundImage: `url(${antarcticaImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center 25%",
-      }}
-    >
+    <div className="cs-visual">
+      <img
+        src={antarcticaImg1200}
+        srcSet={`${antarcticaImg800} 800w, ${antarcticaImg1200} 1200w`}
+        sizes="(max-width: 767px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        alt=""
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "center 25%" }}
+      />
       {/* Vignette */}
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, transparent 40%, rgba(5,10,20,0.55) 100%)" }} />
       {/* Bottom fade so badge/metric sit cleanly */}

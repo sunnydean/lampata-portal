@@ -1,5 +1,6 @@
 type SeoPageKey =
   | "index.html"
+  | "cookie-policy/index.html"
   | "training/index.html"
   | "earth-observation-tech-radar/index.html"
   | "privacypolicy/index.html";
@@ -511,6 +512,85 @@ const pages: SeoPage[] = [
     llmsLabel: "Privacy Notice",
     llmsSummary:
       "Customer privacy notice covering data use, lawful bases, and privacy contact details. This page is intended for policy access rather than search visibility.",
+  },
+  {
+    key: "cookie-policy/index.html",
+    path: "/cookie-policy/",
+    title: "Cookie Policy | Lampata",
+    description:
+      "Lampata's cookie policy covering strictly necessary cookies, Cloudflare Web Analytics, and browser cookie controls.",
+    robots: "noindex, follow",
+    includeInSitemap: true,
+    snapshotHtml: (basePath) =>
+      buildSnapshotPage({
+        eyebrow: "Lampata Cookies",
+        title: "Cookie policy",
+        intro:
+          "This page explains how Lampata uses strictly necessary cookies and Cloudflare Web Analytics on lampata.co.uk.",
+        sections: [
+          {
+            title: "What the policy covers",
+            body: list([
+              "What cookies and similar technologies are.",
+              "When strictly necessary Cloudflare security cookies may be used.",
+              "How Cloudflare Web Analytics is used for aggregate measurement.",
+              "How to manage cookies in your browser and how to contact Lampata with questions.",
+            ]),
+          },
+          {
+            title: "Analytics and measurement",
+            body: [
+              paragraph(
+                "Lampata uses Cloudflare Web Analytics to understand aggregate website usage and performance.",
+              ),
+              paragraph(
+                "According to Cloudflare's documentation, this measurement does not use cookies or browser storage such as localStorage or sessionStorage.",
+              ),
+            ].join(""),
+          },
+          {
+            title: "Contact and related page",
+            body: [
+              paragraph(
+                `Email ${anchor("mailto:contact+gdpr@lampata.co.uk", "contact+gdpr@lampata.co.uk")} with questions about cookies or similar technologies used on the website.`,
+              ),
+              paragraph(
+                `See ${anchor(withBasePath("/privacypolicy/", basePath), "the privacy notice")} for information about how Lampata handles personal data more broadly.`,
+              ),
+            ].join(""),
+          },
+        ],
+      }),
+    jsonLd: ({ siteUrl, basePath }) => {
+      const homeUrl = toAbsoluteUrl("/", siteUrl, basePath);
+      const pageUrl = toAbsoluteUrl("/cookie-policy/", siteUrl, basePath);
+
+      return [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": `${pageUrl}#webpage`,
+          url: pageUrl,
+          name: "Cookie policy",
+          description:
+            "Lampata's cookie policy covering strictly necessary cookies and Cloudflare Web Analytics.",
+          inLanguage: "en-GB",
+          isPartOf: {
+            "@id": `${homeUrl}${websiteIdSuffix}`,
+          },
+          about: {
+            "@id": `${homeUrl}${organizationIdSuffix}`,
+          },
+        },
+        breadcrumbJsonLd(pageUrl, [
+          { name: "Home", path: "/" },
+          { name: "Cookie policy", path: "/cookie-policy/" },
+        ], siteUrl, basePath),
+      ];
+    },
+    llmsLabel: "Cookie Policy",
+    llmsSummary:
+      "Cookie policy covering strictly necessary Cloudflare cookies, Cloudflare Web Analytics, and browser cookie controls.",
   },
 ];
 

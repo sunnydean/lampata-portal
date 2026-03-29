@@ -71,6 +71,12 @@ export function Footer() {
             >
               Privacy Policy
             </a>
+            <a
+              href={withBasePath("/cookie-policy/")}
+              className="transition-colors hover:text-white/72"
+            >
+              Cookie Policy
+            </a>
           </div>
         </div>
       </div>

@@ -167,6 +167,24 @@ export interface PrivacyNoticeContent {
   sections: PrivacyNoticeSection[];
 }
 
+export interface CookiePolicySection {
+  title: string;
+  paragraphs?: string[];
+  bullets?: string[];
+}
+
+export interface CookiePolicyContent {
+  eyebrow: string;
+  title: string;
+  effectiveDate: string;
+  intro: string;
+  summary: string[];
+  contact: {
+    email: string;
+  };
+  sections: CookiePolicySection[];
+}
+
 export interface TrainingTrack {
   title: string;
   purpose: string;
@@ -223,6 +241,8 @@ export const heroProofPoints = [
   "From rapid pilots to analyst-ready products and production pipelines.",
 ];
 
+// Source reference for the About us feature image:
+// https://unsplash.com/s/photos/satellite-imagery?asset=%5B%22Photos%22%2C%7B%22slug%22%3A%22satellite-view-of-desert-terrain-with-geological-formations-1Fi2SOUnB1w%22%7D%5D
 export const audienceFeatureImage =
   "https://images.unsplash.com/photo-1722083854891-7324e80ad2ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";
 
@@ -1213,6 +1233,74 @@ export const privacyNoticeContent: PrivacyNoticeContent = {
         "SK9 5AF",
         "Helpline number: 0303 123 1113.",
         "Website: https://www.ico.org.uk/make-a-complaint",
+      ],
+    },
+  ],
+};
+
+export const cookiePolicyContent: CookiePolicyContent = {
+  eyebrow: "Cookie Policy",
+  title: "Cookie Policy",
+  effectiveDate: "29 March 2026",
+  intro:
+    "This Cookie Policy explains how Lampata LTD uses cookies and similar technologies on lampata.co.uk.",
+  summary: [
+    "What cookies are",
+    "Strictly necessary cookies",
+    "Analytics and measurement",
+    "Third-party websites",
+    "How to manage cookies",
+    "Changes to this policy",
+    "Contact",
+  ],
+  contact: {
+    email: "contact+gdpr@lampata.co.uk",
+  },
+  sections: [
+    {
+      title: "What cookies are",
+      paragraphs: [
+        "Cookies are small text files that can be stored on your device when you visit a website. They are commonly used to support core website functions, remember settings, and help website operators understand how a service is performing.",
+        "Similar technologies can include browser storage, scripts, pixels, and other tools that store or access information on your device. This policy explains what Lampata uses on this website today.",
+      ],
+    },
+    {
+      title: "Strictly necessary cookies",
+      paragraphs: [
+        "Lampata does not use cookies for advertising or personalised profiling on this website. However, Cloudflare security or service-protection features may set strictly necessary cookies when needed to protect the website, distinguish legitimate visitors from malicious traffic, or complete a security challenge.",
+        "These cookies are only used where required to keep the website secure, reliable, and available. They are not used by Lampata to track you across websites for advertising purposes.",
+      ],
+      bullets: [
+        "Examples may include Cloudflare cookies such as __cf_bm or cf_clearance when those protections are triggered.",
+        "These cookies may not appear on every visit.",
+      ],
+    },
+    {
+      title: "Analytics and measurement",
+      paragraphs: [
+        "Lampata uses Cloudflare Web Analytics to understand aggregate website usage and performance, such as page views, referral sources, and general traffic trends.",
+        "According to Cloudflare's documentation, Cloudflare Web Analytics does not use cookies or browser storage such as localStorage or sessionStorage for this measurement.",
+        "Lampata does not currently use Google Analytics or other non-essential cookie-based tracking tools on this website. If that changes, we will update this policy and any required consent controls before enabling them.",
+      ],
+    },
+    {
+      title: "Third-party websites",
+      paragraphs: [
+        "This website includes links to third-party websites and may load third-party resources such as external media thumbnails or documents. Those third parties may process request information according to their own privacy and cookie policies.",
+        "If you follow a link to another website or interact with a third-party service, that provider's policies will apply to your use of that service.",
+      ],
+    },
+    {
+      title: "How to manage cookies",
+      paragraphs: [
+        "Most browsers allow you to view, block, or delete cookies through their settings. You can usually find these controls in your browser's privacy or security options.",
+        "If you block all cookies, some security-related website functions may not work as expected if anti-abuse or service-protection measures are triggered.",
+      ],
+    },
+    {
+      title: "Changes to this policy",
+      paragraphs: [
+        "We may update this Cookie Policy from time to time to reflect changes to the website, the services we use, or applicable legal requirements. When we make material changes, we will update the effective date shown at the top of this page.",
       ],
     },
   ],
