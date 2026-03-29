@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { caseStudies } from "../content/siteContent";
+import { caseStudies } from "../content/homeContent";
 import antarcticaImg800 from "@/assets/antarctica-800.webp";
 import antarcticaImg1200 from "@/assets/antarctica-1200.webp";
 

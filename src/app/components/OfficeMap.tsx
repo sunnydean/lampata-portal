@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import maplibregl, { type StyleSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import "./OfficeMap.css";
 
 const officeCoordinates = [0.13190011440690916, 52.203402467982464] as const;
 

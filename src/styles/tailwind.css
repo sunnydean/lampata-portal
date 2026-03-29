@@ -1,4 +1,14 @@
 @import 'tailwindcss' source(none);
-@source '../**/*.{js,ts,jsx,tsx}';
+@source "../main.tsx";
+@source "../cookie-main.tsx";
+@source "../privacy-main.tsx";
+@source "../radar-main.tsx";
+@source "../training-main.tsx";
+@source "../app/*.{ts,tsx}";
+@source "../app/components/*.{ts,tsx}";
+@source "../app/components/figma/*.{ts,tsx}";
+@source "../app/components/ui/dialog.tsx";
+@source "../app/components/ui/popover.tsx";
+@source "../app/components/ui/scroll-area.tsx";
 
 @import 'tw-animate-css';

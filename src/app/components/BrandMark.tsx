@@ -1,7 +1,8 @@
 import lampataLogo from "../../../Lampata.svg";
 import lampataLogoSource from "../../../Lampata.svg?raw";
-import { useReducedMotion } from "motion/react";
 import { useEffect, useId, useRef, type PointerEvent as ReactPointerEvent } from "react";
+import { useIdleActivation } from "../hooks/useIdleActivation";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { cn } from "./ui/utils";
 
 interface BrandMarkProps {
@@ -106,7 +107,8 @@ function createOrbitGeometry(svgSource: string): OrbitGeometry | null {
 const SATELLITE_ORBIT = createOrbitGeometry(lampataLogoSource);
 
 function OrbitingSatellite({ variant }: Pick<BrandMarkProps, "variant">) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
+  const motionReady = useIdleActivation(1200);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const orbitPathRef = useRef<SVGPathElement | null>(null);
   const satelliteRef = useRef<SVGGElement | null>(null);
@@ -131,6 +133,7 @@ function OrbitingSatellite({ variant }: Pick<BrandMarkProps, "variant">) {
   const accentFill = variant === "light" ? "#ffffff" : "#f5d704";
   const badgeFill = variant === "light" ? "rgba(255, 255, 255, 0.22)" : "rgba(255, 255, 255, 0.96)";
   const badgeStroke = variant === "light" ? "rgba(255, 255, 255, 0.42)" : "rgba(0, 69, 139, 0.12)";
+  const isInteractive = motionReady && !shouldReduceMotion;
 
   function getSatelliteRotation(point: OrbitPoint) {
     if (!SHOW_SATELLITE_BEAM || !SATELLITE_ORBIT) {
@@ -218,6 +221,10 @@ function OrbitingSatellite({ variant }: Pick<BrandMarkProps, "variant">) {
   }
 
   function handlePointerDown(event: ReactPointerEvent<SVGGElement>) {
+    if (!isInteractive) {
+      return;
+    }
+
     const pointerPoint = getPointFromClientPosition(event.clientX, event.clientY);
 
     if (!pointerPoint) {
@@ -242,6 +249,10 @@ function OrbitingSatellite({ variant }: Pick<BrandMarkProps, "variant">) {
   }
 
   function handlePointerMove(event: ReactPointerEvent<SVGGElement>) {
+    if (!isInteractive) {
+      return;
+    }
+
     if (
       motionStateRef.current.mode !== "drag" ||
       motionStateRef.current.pointerId !== event.pointerId
@@ -260,6 +271,10 @@ function OrbitingSatellite({ variant }: Pick<BrandMarkProps, "variant">) {
   }
 
   function handlePointerRelease(event: ReactPointerEvent<SVGGElement>) {
+    if (!isInteractive) {
+      return;
+    }
+
     if (motionStateRef.current.pointerId !== event.pointerId) {
       return;
     }
@@ -373,6 +388,18 @@ function OrbitingSatellite({ variant }: Pick<BrandMarkProps, "variant">) {
     }
 
     const orbitLength = orbitPathNode.getTotalLength();
+
+    if (!motionReady) {
+      const point = orbitPathNode.getPointAtLength(motionStateRef.current.currentDistance);
+
+      setSatelliteTransform({
+        x: point.x,
+        y: point.y,
+      });
+
+      return;
+    }
+
     let frameId = 0;
 
     const animate = (timestamp: number) => {
@@ -441,7 +468,7 @@ function OrbitingSatellite({ variant }: Pick<BrandMarkProps, "variant">) {
     frameId = window.requestAnimationFrame(animate);
 
     return () => window.cancelAnimationFrame(frameId);
-  }, [shouldReduceMotion]);
+  }, [motionReady, shouldReduceMotion]);
 
   return (
     <svg
@@ -471,7 +498,7 @@ function OrbitingSatellite({ variant }: Pick<BrandMarkProps, "variant">) {
       ) : null}
       <g
         ref={satelliteRef}
-        className="pointer-events-auto cursor-grab"
+        className={cn(isInteractive ? "pointer-events-auto cursor-grab" : "pointer-events-none")}
         onClick={handleSatelliteClick}
         onPointerCancel={handlePointerRelease}
         onPointerDown={handlePointerDown}

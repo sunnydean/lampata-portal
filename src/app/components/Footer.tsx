@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { navItems } from "../content/siteContent";
+import { navItems } from "../content/sharedContent";
 import { withBasePath } from "../lib/paths";
 import { BrandMark } from "./BrandMark";
 

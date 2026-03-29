@@ -1,5 +1,5 @@
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 const ROTATING_WORDS = [
   "European Policy",
@@ -64,7 +64,7 @@ function createCyclingState(): HeadlineState {
 }
 
 export function AnimatedHeadline() {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
   const initialState = useMemo(() => createCyclingState(), []);
   const [headline, setHeadline] = useState<HeadlineState>(initialState);
 
@@ -139,18 +139,12 @@ function AnimatedWord({ word, reserveWord }: { word: string; reserveWord: string
         aria-hidden="true"
         className="pointer-events-none absolute bottom-[0.02em] left-[0.08em] h-[0.035em] w-[48%] rounded-full bg-[#f5d704]/18"
       />
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={word}
-          initial={{ opacity: 0, y: "0.04em" }}
-          animate={{ opacity: 1, y: "0em" }}
-          exit={{ opacity: 0, y: "-0.03em" }}
-          transition={{ duration: 0.18, ease: [0.28, 0.92, 0.36, 1] }}
-          className="absolute left-0 top-0 whitespace-nowrap"
-        >
-          <span>{word}</span>
-        </motion.span>
-      </AnimatePresence>
+      <span
+        key={word}
+        className="animated-headline-word absolute left-0 top-0 whitespace-nowrap"
+      >
+        <span>{word}</span>
+      </span>
     </span>
   );
 }

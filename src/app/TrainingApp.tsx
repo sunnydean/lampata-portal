@@ -24,7 +24,7 @@ import {
   trainingRoadmapCourse,
   trainingTracks,
   trainingVideos,
-} from "./content/siteContent";
+} from "./content/trainingContent";
 
 const trackIcons = [BookOpen, Cpu, FlaskConical, Cloud];
 const formatIcons = [UsersRound, MonitorPlay, GraduationCap];

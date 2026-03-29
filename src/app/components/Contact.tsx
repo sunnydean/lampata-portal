@@ -1,16 +1,14 @@
 import type { ChangeEvent, FormEvent } from "react";
-import { lazy, Suspense, useState } from "react";
-import { motion, useInView } from "motion/react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { ArrowRight, ExternalLink, Mail, MapPin } from "lucide-react";
-import { useRef } from "react";
+import { Reveal } from "./Reveal";
 
 const OfficeMap = lazy(() =>
   import("./OfficeMap").then((module) => ({ default: module.OfficeMap })),
 );
 
 export function Contact() {
-  const ref = useRef<HTMLElement | null>(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+  const mapSlotRef = useRef<HTMLDivElement | null>(null);
   const officeLatitude = 52.203402467982464;
   const officeLongitude = 0.13190011440690916;
   const officeAddress =
@@ -24,6 +22,31 @@ export function Contact() {
     email: "",
     message: "",
   });
+  const [shouldLoadMap, setShouldLoadMap] = useState(false);
+
+  useEffect(() => {
+    const mapSlot = mapSlotRef.current;
+
+    if (!mapSlot || shouldLoadMap) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setShouldLoadMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "220px" },
+    );
+
+    observer.observe(mapSlot);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [shouldLoadMap]);
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -59,7 +82,7 @@ export function Contact() {
   );
 
   return (
-    <section id="contact" ref={ref} className="bg-white px-6 py-[4.5rem] md:py-24">
+    <section className="bg-white px-6 py-[4.5rem] md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex max-w-3xl flex-col gap-4">
           <span className="section-eyebrow">Contact</span>
@@ -67,10 +90,7 @@ export function Contact() {
         </div>
 
         <div className="grid items-stretch gap-8 lg:grid-cols-[1fr_1fr]">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45 }}
+          <Reveal
             className="order-2 flex min-h-0 flex-col lg:order-none lg:min-h-[38rem]"
           >
             <div className="px-4 pb-3 pt-4 sm:px-6 sm:pb-4 sm:pt-5">
@@ -78,8 +98,11 @@ export function Contact() {
                 Office location
               </p>
             </div>
-            <div className="min-h-[16rem] flex-1 overflow-hidden rounded-[1rem] px-3 pb-3 sm:min-h-[20rem] lg:min-h-[28rem]">
-              {isInView ? (
+            <div
+              ref={mapSlotRef}
+              className="min-h-[16rem] flex-1 overflow-hidden rounded-[1rem] px-3 pb-3 sm:min-h-[20rem] lg:min-h-[28rem]"
+            >
+              {shouldLoadMap ? (
                 <Suspense fallback={mapFallback}>
                   <OfficeMap />
                 </Suspense>
@@ -104,12 +127,10 @@ export function Contact() {
                 <ExternalLink className="h-4 w-4" />
               </a>
             </div>
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45, delay: 0.08 }}
+          <Reveal
+            delay={80}
             className="order-1 flex min-h-0 flex-col rounded-[1.2rem] bg-white p-5 shadow-[0_28px_70px_-52px_rgba(0,69,139,0.26)] sm:p-6 lg:order-none lg:min-h-[38rem] lg:p-8"
           >
             <div className="order-2 mb-0 mt-7 space-y-5 border-t border-[#00458b]/8 pt-6 lg:order-none lg:mt-0 lg:mb-8 lg:border-t-0 lg:pt-0">
@@ -141,10 +162,9 @@ export function Contact() {
               </div>
             </div>
 
-            <motion.form
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.14 }}
+            <Reveal
+              as="form"
+              delay={140}
               onSubmit={handleSubmit}
               className="order-1 flex flex-1 flex-col lg:order-none"
             >
@@ -208,8 +228,8 @@ export function Contact() {
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
-            </motion.form>
-          </motion.div>
+            </Reveal>
+          </Reveal>
         </div>
       </div>
     </section>

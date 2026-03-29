@@ -102,10 +102,11 @@ export function HeroMapAnimation({
   className,
   mode = "full",
 }: HeroMapAnimationProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
+  const shouldReduceMotion = prefersReducedMotion;
   const isMobile = mode === "mobile";
-  const intro = mode === "full" && !shouldReduceMotion;
-  const shouldPulse = !shouldReduceMotion;
+  const intro = mode === "full" && !prefersReducedMotion;
+  const shouldPulse = !prefersReducedMotion;
 
   /* ═══════ Mobile ═══════ */
   if (isMobile) {

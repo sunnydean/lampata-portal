@@ -40,6 +40,10 @@ function normalizeBasePath(basePath?: string) {
   return `/${trimmed}/`;
 }
 
+function resolveAssetHref(basePath: string, assetPath: string) {
+  return basePath === "/" ? assetPath : `${basePath}${assetPath.replace(/^\/+/, "")}`;
+}
+
 function getBuildBasePath(siteUrl?: string) {
   const explicitBasePath = process.env.VITE_BASE_PATH || process.env.BASE_PATH;
 
@@ -90,7 +94,19 @@ export default defineConfig(() => {
           );
           const page = pageKey ? getPageByKey(pageKey) : undefined;
           const faviconHref =
-            basePath === "/" ? "/lampatageospatial_logo.jpeg" : `${basePath}lampatageospatial_logo.jpeg`;
+            resolveAssetHref(basePath, "/lampatageospatial_logo.jpeg");
+          const fontPreloadMarkup =
+            pageKey === "index.html"
+              ? [
+                  resolveAssetHref(basePath, "/fonts/space-grotesk-latin.woff2"),
+                  resolveAssetHref(basePath, "/fonts/public-sans-latin.woff2"),
+                ]
+                  .map(
+                    (href) =>
+                      `  <link rel="preload" href="${href}" as="font" type="font/woff2" crossorigin />`,
+                  )
+                  .join("\n")
+              : "";
 
           if (!page) {
             return html;
@@ -117,7 +133,7 @@ export default defineConfig(() => {
 
           transformedHtml = transformedHtml.replace(
             "</head>",
-            `  ${renderSeoHead(page, seoContext)}\n</head>`,
+            `${fontPreloadMarkup ? `${fontPreloadMarkup}\n` : ""}  ${renderSeoHead(page, seoContext)}\n</head>`,
           );
 
           const snapshotMarkup = renderSnapshot(page, basePath);
@@ -169,6 +185,46 @@ export default defineConfig(() => {
           privacy: path.resolve(__dirname, "privacypolicy/index.html"),
           radar: path.resolve(__dirname, "earth-observation-tech-radar/index.html"),
           training: path.resolve(__dirname, "training/index.html"),
+        },
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) {
+              return undefined;
+            }
+
+            if (
+              id.includes("/react/") ||
+              id.includes("/react-dom/") ||
+              id.includes("/scheduler/")
+            ) {
+              return "framework";
+            }
+
+            if (id.includes("/motion/")) {
+              return "motion";
+            }
+
+            if (
+              id.includes("/@radix-ui/") ||
+              id.includes("/react-remove-scroll/") ||
+              id.includes("/react-remove-scroll-bar/") ||
+              id.includes("/react-style-singleton/") ||
+              id.includes("/use-callback-ref/") ||
+              id.includes("/aria-hidden/")
+            ) {
+              return "dialog-ui";
+            }
+
+            if (id.includes("/d3-hierarchy/")) {
+              return "training-graph";
+            }
+
+            if (id.includes("/maplibre-gl/") || id.includes("/@maplibre/")) {
+              return "map";
+            }
+
+            return undefined;
+          },
         },
       },
     },

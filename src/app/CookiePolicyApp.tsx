@@ -6,7 +6,7 @@ import {
   Paragraph,
   SectionHeading,
 } from "./components/LegalPage";
-import { cookiePolicyContent } from "./content/siteContent";
+import { cookiePolicyContent } from "./content/legalContent";
 
 export default function CookiePolicyApp() {
   return (

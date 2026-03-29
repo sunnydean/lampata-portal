@@ -1,5 +1,5 @@
 import { hierarchy, tree } from "d3-hierarchy";
-import type { TrainingRoadmapCourse } from "../content/siteContent";
+import type { TrainingRoadmapCourse } from "../content/trainingContent";
 import roadmap from "../content/trainingRoadmap.json";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 

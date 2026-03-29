@@ -6,7 +6,7 @@ import {
   Paragraph,
   SectionHeading,
 } from "./components/LegalPage";
-import { privacyNoticeContent } from "./content/siteContent";
+import { privacyNoticeContent } from "./content/legalContent";
 
 const icoRightsBaseHref =
   "https://ico.org.uk/for-organisations/advice-for-small-organisations/privacy-notices-and-cookies/create-your-own-privacy-notice/your-data-protection-rights/";

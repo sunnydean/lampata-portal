@@ -1,7 +1,6 @@
-import { motion } from "motion/react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
-import { navItems } from "../content/siteContent";
+import { navItems } from "../content/sharedContent";
 import { withBasePath } from "../lib/paths";
 import { BrandMark } from "./BrandMark";
 
@@ -9,12 +8,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed inset-x-0 top-0 z-50 border-b border-b-[#00458b]/10 bg-white/92 backdrop-blur-xl"
-    >
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-b-[#00458b]/10 bg-white/92 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-6 py-2.5">
         <div className="flex items-center justify-between">
           <a
@@ -54,11 +48,7 @@ export function Header() {
         </div>
 
         {mobileMenuOpen && (
-          <motion.nav
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="panel-surface mt-4 flex flex-col gap-4 rounded-[1.5rem] p-5 lg:hidden"
-          >
+          <nav className="panel-surface mt-4 flex flex-col gap-4 rounded-[1.5rem] p-5 lg:hidden">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -77,9 +67,9 @@ export function Header() {
               Start a conversation
               <ArrowRight className="h-4 w-4" />
             </a>
-          </motion.nav>
+          </nav>
         )}
       </div>
-    </motion.header>
+    </header>
   );
 }
