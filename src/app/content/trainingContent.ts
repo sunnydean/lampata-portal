@@ -102,7 +102,7 @@ export const trainingVideos: TrainingVideo[] = [
       "A practical session on using agentic AI to support FAIR workflows, with an emphasis on reproducibility, reusable process design, and open-science delivery.",
   },
   {
-    title: "FAIR and Open Science for Earth Sciences with ESA EarthCODE",
+    title: "FAIR and Open Science for Earth Sciences with ESA",
     source: "FOSS4G:UK",
     url: "https://www.youtube.com/watch?v=lqIPHpNGL2U",
     youtubeId: "lqIPHpNGL2U",
@@ -143,14 +143,14 @@ export const trainingEvents: TrainingEvent[] = [
     status: "past",
   },
   {
-    title: "FAIR and Open Science for Earth Sciences with ESA EarthCODE",
+    title: "FAIR and Open Science for Earth Sciences with ESA",
     date: "October 2, 2025",
     format: "FOSS4G:UK talk, Leeds",
     status: "past",
     link: "https://talks.osgeo.org/foss4g-uk-2025/talk/KYMRGJ/",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     date: "October 1, 2025",
     format: "FOSS4G:UK workshop, Leeds",
     status: "past",
@@ -165,14 +165,14 @@ export const trainingEvents: TrainingEvent[] = [
   },
   {
     title:
-      "EarthCODE - Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
+      "Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
     date: "September 15, 2025",
     format: "EUMETSAT 2025 conference presentation, Lyon",
     status: "past",
     link: "https://program-eumetsat2025.kuoni-congress.info/presentation/earthcode-advancing-open-science-and-fair-practices-for-enhanced-earth-observation-transparency-collaboration-and-data-reuse",
   },
   {
-    title: "EDC & Pangeo Integration on EarthCODE",
+    title: "EDC & Pangeo Workshop",
     date: "June 25, 2025",
     format: "LPS25 demo, EO Arena, Vienna",
     status: "past",
@@ -186,14 +186,14 @@ export const trainingEvents: TrainingEvent[] = [
     link: "https://lps25.esa.int/programme/programme-session/?id=E8D71CE6-246F-4734-BD5D-971C4046B714",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     date: "June 23, 2025",
     format: "LPS25 hands-on training, Vienna",
     status: "past",
     link: "https://lps25.esa.int/programme/programme-session/?id=3B4C896E-8D9E-4240-BB85-F95BC638BD2B",
   },
   {
-    title: "FAIR and Open Science with EarthCODE Integrated Platforms",
+    title: "FAIR and Open Science with Earth Observation Platforms",
     date: "June 22, 2025",
     format: "LPS25 tutorial, Vienna",
     status: "past",

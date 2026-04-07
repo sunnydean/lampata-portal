@@ -541,6 +541,18 @@ export const caseStudies: CaseStudy[] = [
     client: "Earth observation · AI classification · Urban policy",
   },
   {
+    visual: "sustainability",
+    badge: "EU Sustainability Tech",
+    metric: "Sustainability Analytics Scale-Up",
+    title: "Scope 1, 2 & 3 Sustainability Platform",
+    description: [
+      "We developed Scope 1,2 & 3 carbon footprint analysis platform to support the certification and evidence checking of real-estate and business operations, integrating various indicators such as financial, economic, and social data - for a London-based sustainability tech scale-up.",
+      "Supporting the business through its growth journey, the platform underpinned a successful multi-million pound acquisition. Our software received a perfect 10/10 score from the acquisition's technical advisory board.",
+    ],
+    outcomes: ["Energy", "Sustainability", "Scope 1, 2 & 3", "Multi-million £ acquisition"],
+    client: "Sustainability tech · ESG engineering · Carbon analytics",
+  },
+  {
     visual: "antarctica",
     badge: "Geospatial Data Engineering",
     metric: "ESA Polar Sciences Cluster",
@@ -552,6 +564,18 @@ export const caseStudies: CaseStudy[] = [
     ],
     outcomes: ["Zarr data cube", "Analysis-ready", "Polar science"],
     client: "Earth Sciences · Cloud-native infrastructure · Open science",
+  },
+  {
+    visual: "emr",
+    badge: "Healthcare · EMR",
+    metric: "Yorkshire Health Care Charity",
+    title: "Integrating EMR With the Department of Health",
+    description: [
+      "We developed an electronic medical record system for a large UK charity serving hospitals in developing countries, later deployed across multiple hospitals and integrated directly into the government's Department of Health systems.",
+      "The platform features a client portal, a distributed resilient architecture designed for disconnected environments, and custom data replication mechanisms - ensuring patient records remain consistent and accessible even without reliable connectivity.",
+    ],
+    outcomes: ["Dept. of Health integration", "Disconnected-environment resilience", "Multi-hospital deployment"],
+    client: "Healthcare technology · EMR engineering · Distributed systems",
   },
 ];
 
@@ -603,9 +627,9 @@ export const proofStories: ProofStory[] = [
 export const openScienceItems: OpenScienceItem[] = [
   {
     icon: "research",
-    title: "Selected publications",
+    title: "Publications",
     description:
-      "Published papers, talks, workshops, datasets, and reports back up Lampata's work in mobility data, urban analytics, FAIR workflows, and Earth observation.",
+      "Lampata's research work across geospatial, urban analytics, mobility data, FAIR open science, and Earth observation.",
     details: [],
   },
   {
@@ -738,7 +762,7 @@ export const publications: Publication[] = [
       "Signals deeper machine learning experience that underpins present geo-spatial AI work, while remaining secondary to the site's core themes.",
   },
   {
-    title: "Lampata engineering report for the OGC Open Science Persistent Demonstrator (OSPD)",
+    title: "OGC Open Science Persistent Demonstrator (OSPD)",
     venue: "OGC",
     year: 2025,
     kind: "Report",
@@ -746,7 +770,7 @@ export const publications: Publication[] = [
       "Captures forthcoming OGC engineering-report work around reproducible, standards-aware open-science workflows, with final release details still pending.",
   },
   {
-    title: "EarthCODE poster",
+    title: "EO for Europe",
     venue: "EuroGEO Workshop",
     year: 2025,
     kind: "Conference",
@@ -755,7 +779,7 @@ export const publications: Publication[] = [
       "Adds EuroGEO Workshop 2025 poster visibility for EarthCODE's FAIR and open-science work, linked through the public e-poster gallery.",
   },
   {
-    title: "FAIR and Open Science for Earth Sciences with ESA EarthCODE",
+    title: "FAIR and Open Science for Earth Sciences with ESA",
     venue: "FOSS4G:UK",
     year: 2025,
     kind: "Conference",
@@ -764,7 +788,7 @@ export const publications: Publication[] = [
       "A public FOSS4G:UK talk on ESA EarthCODE, open-science delivery, and reproducible Earth observation workflows.",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     venue: "FOSS4G:UK",
     year: 2025,
     kind: "Conference",
@@ -783,7 +807,7 @@ export const publications: Publication[] = [
   },
   {
     title:
-      "EarthCODE - Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
+      "Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
     venue: "EUMETSAT 2025",
     year: 2025,
     kind: "Conference",
@@ -801,7 +825,7 @@ export const publications: Publication[] = [
       "Adds a peer-reviewed proceedings paper focused on turning FAIR and open-science principles into practical Earth system science delivery through EarthCODE.",
   },
   {
-    title: "EDC & Pangeo Integration on EarthCODE",
+    title: "EDC & Pangeo Workshop",
     venue: "Living Planet Symposium",
     year: 2025,
     kind: "Conference",
@@ -819,7 +843,7 @@ export const publications: Publication[] = [
       "A Living Planet Symposium demo introducing EarthCODE's collaborative open-development model for FAIR and open Earth system science.",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     venue: "Living Planet Symposium",
     year: 2025,
     kind: "Conference",
@@ -828,7 +852,7 @@ export const publications: Publication[] = [
       "A Living Planet Symposium workshop on accessing EarthCODE datasets and workflows, then publishing reproducible experiments.",
   },
   {
-    title: "FAIR and Open Science with EarthCODE Integrated Platforms",
+    title: "FAIR and Open Science with Earth Observation Platforms",
     venue: "Living Planet Symposium",
     year: 2025,
     kind: "Conference",
@@ -837,7 +861,7 @@ export const publications: Publication[] = [
       "A Living Planet Symposium tutorial on FAIR assessment, integrated EarthCODE platforms, and publishing open EO experiments.",
   },
   {
-    title: "EarthCODE - a FAIR and Open Environment for collaborative research in Earth System Science",
+    title: "a FAIR and Open Environment for collaborative research in Earth System Science",
     venue: "EGU General Assembly",
     year: 2025,
     kind: "Conference",
@@ -863,4 +887,9 @@ export const earthcodeSection: EarthcodeSectionContent = {
     "Historically, Earth Observation (EO) research has been closed and complex. EarthCODE is the European Space Agency's open-science mission to change that, making EO research open, FAIR, and accessible to everyone.",
   leadership:
     "Lampata is proud to be a leading part of this mission by building tools to make FAIR Earth Sciences easy, data stewardship, and working with scientists to create and adopt best practices for data and code quality.",
+  video: {
+    title: "Learn more about EarthCODE",
+    embedUrl:
+      "https://www.youtube-nocookie.com/embed/6PW-0xnZ9kU?start=40&autoplay=1&mute=1&controls=1&rel=0&playsinline=1&enablejsapi=1&modestbranding=1",
+  },
 };

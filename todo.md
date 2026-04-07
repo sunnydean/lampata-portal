@@ -3,6 +3,7 @@
 todo
 - add more case studies from lampata eu website
 - create the image stack thing ----
+- News and Workshops
 - fix up training page
 - events in training?
 - spatial data science - use that 

@@ -471,16 +471,32 @@
     margin: 0 auto;
   }
 
-  .cs-grid {
+  .cs-carousel-wrapper {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 2rem;
+  }
+
+  .cs-grid {
+    display: flex;
+    gap: 1.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+    margin-bottom: -6px;
+    cursor: grab;
+  }
+
+  .cs-grid::-webkit-scrollbar {
+    display: none;
   }
 
   .cs-card {
     position: relative;
     z-index: 2;
+    flex: 0 0 380px;
+    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -495,6 +511,43 @@
   .cs-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 48px rgba(0, 69, 139, 0.14);
+  }
+
+  .cs-arrow {
+    position: absolute;
+    top: 130px;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow:
+      0 2px 16px rgba(0, 69, 139, 0.14),
+      0 0 0 1px rgba(0, 69, 139, 0.06);
+    border: none;
+    cursor: pointer;
+    transition:
+      opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.2s;
+    color: #00458b;
+  }
+
+  .cs-arrow:hover {
+    box-shadow:
+      0 4px 24px rgba(0, 69, 139, 0.2),
+      0 0 0 1px rgba(0, 69, 139, 0.1);
+  }
+
+  .cs-arrow-prev {
+    left: -22px;
+  }
+
+  .cs-arrow-next {
+    right: -22px;
   }
 
   .cs-visual {
@@ -691,9 +744,17 @@
       padding: 3.25rem 1rem 4rem;
     }
 
+    .cs-arrow {
+      display: none;
+    }
+
     .cs-grid {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
+      gap: 1rem;
+    }
+
+    .cs-card {
+      flex: 0 0 calc(100vw - 2rem);
+      scroll-snap-align: center;
     }
 
     .cs-visual {

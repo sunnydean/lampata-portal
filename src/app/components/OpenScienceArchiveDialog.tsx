@@ -25,12 +25,10 @@ export function OpenScienceArchiveDialog({
           <DialogHeader className="text-left">
             <p className="section-eyebrow mb-3 w-fit sm:mb-4">Research Archive</p>
             <DialogTitle className="font-display text-[1.32rem] leading-[1.02] tracking-[-0.06em] text-[#00458b] sm:text-[2.4rem]">
-              Selected publications, talks, workshops, and research outputs
+              Publications, talks, workshops, and research outputs
             </DialogTitle>
             <DialogDescription className="max-w-3xl text-[0.82rem] leading-5 text-[#00458b]/72 sm:text-sm sm:leading-7">
-              A fuller list of the papers, talks, workshops, datasets, and reports
-              that inform Lampata&apos;s work across urban analytics, mobility data,
-              FAIR open science, and Earth observation.
+              Lampata's research work across geospatial, urban analytics, mobility data, FAIR open science, and Earth observation.
             </DialogDescription>
           </DialogHeader>
         </div>

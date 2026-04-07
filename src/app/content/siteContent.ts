@@ -95,7 +95,7 @@ export interface CapabilityPillar {
 }
 
 export interface CaseStudy {
-  visual: "ogc" | "urban" | "antarctica";
+  visual: "ogc" | "urban" | "antarctica" | "sustainability" | "emr";
   badge: string;
   metric: string;
   title: string;
@@ -137,6 +137,10 @@ export interface EarthcodeSectionContent {
   title: string;
   description: string;
   leadership: string;
+  video: {
+    title: string;
+    embedUrl: string;
+  };
 }
 
 export interface PrivacyNoticeListItem {
@@ -823,9 +827,9 @@ export const proofStories: ProofStory[] = [
 export const openScienceItems: OpenScienceItem[] = [
   {
     icon: "research",
-    title: "Selected publications",
+    title: "Publications",
     description:
-      "Published papers, talks, workshops, datasets, and reports back up Lampata's work in mobility data, urban analytics, FAIR workflows, and Earth observation.",
+      "Lampata's research work across geospatial, urban analytics, mobility data, FAIR open science, and Earth observation.",
     details: [],
   },
   {
@@ -917,7 +921,7 @@ export const publications: Publication[] = [
       "Signals deeper machine learning experience that underpins present geo-spatial AI work, while remaining secondary to the site's core themes.",
   },
   {
-    title: "Lampata engineering report for the OGC Open Science Persistent Demonstrator (OSPD)",
+    title: "OGC Open Science Persistent Demonstrator (OSPD)",
     venue: "OGC",
     year: 2025,
     kind: "Report",
@@ -925,7 +929,7 @@ export const publications: Publication[] = [
       "Captures forthcoming OGC engineering-report work around reproducible, standards-aware open-science workflows, with final release details still pending.",
   },
   {
-    title: "EarthCODE poster",
+    title: "EO for Europe",
     venue: "EuroGEO Workshop",
     year: 2025,
     kind: "Conference",
@@ -934,7 +938,7 @@ export const publications: Publication[] = [
       "Adds EuroGEO Workshop 2025 poster visibility for EarthCODE's FAIR and open-science work, linked through the public e-poster gallery.",
   },
   {
-    title: "FAIR and Open Science for Earth Sciences with ESA EarthCODE",
+    title: "FAIR and Open Science for Earth Sciences with ESA",
     venue: "FOSS4G:UK",
     year: 2025,
     kind: "Conference",
@@ -943,7 +947,7 @@ export const publications: Publication[] = [
       "A public FOSS4G:UK talk on ESA EarthCODE, open-science delivery, and reproducible Earth observation workflows.",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     venue: "FOSS4G:UK",
     year: 2025,
     kind: "Conference",
@@ -962,7 +966,7 @@ export const publications: Publication[] = [
   },
   {
     title:
-      "EarthCODE - Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
+      "Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
     venue: "EUMETSAT 2025",
     year: 2025,
     kind: "Conference",
@@ -980,7 +984,7 @@ export const publications: Publication[] = [
       "Adds a peer-reviewed proceedings paper focused on turning FAIR and open-science principles into practical Earth system science delivery through EarthCODE.",
   },
   {
-    title: "EDC & Pangeo Integration on EarthCODE",
+    title: "EDC & Pangeo Workshop",
     venue: "Living Planet Symposium",
     year: 2025,
     kind: "Conference",
@@ -998,7 +1002,7 @@ export const publications: Publication[] = [
       "A Living Planet Symposium demo introducing EarthCODE's collaborative open-development model for FAIR and open Earth system science.",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     venue: "Living Planet Symposium",
     year: 2025,
     kind: "Conference",
@@ -1007,7 +1011,7 @@ export const publications: Publication[] = [
       "A Living Planet Symposium workshop on accessing EarthCODE datasets and workflows, then publishing reproducible experiments.",
   },
   {
-    title: "FAIR and Open Science with EarthCODE Integrated Platforms",
+    title: "FAIR and Open Science with Earth Observation Platforms",
     venue: "Living Planet Symposium",
     year: 2025,
     kind: "Conference",
@@ -1016,7 +1020,7 @@ export const publications: Publication[] = [
       "A Living Planet Symposium tutorial on FAIR assessment, integrated EarthCODE platforms, and publishing open EO experiments.",
   },
   {
-    title: "EarthCODE - a FAIR and Open Environment for collaborative research in Earth System Science",
+    title: "A FAIR and Open Environment for collaborative research in Earth System Science",
     venue: "EGU General Assembly",
     year: 2025,
     kind: "Conference",
@@ -1042,6 +1046,11 @@ export const earthcodeSection: EarthcodeSectionContent = {
     "Historically, Earth Observation (EO) research has been closed and complex. EarthCODE is the European Space Agency's open-science mission to change that, making EO research open, FAIR, and accessible to everyone.",
   leadership:
     "Lampata is proud to be a leading part of this mission by building tools to make FAIR Earth Sciences easy, data stewardship, and working with scientists to create and adopt best practices for data and code quality.",
+  video: {
+    title: "Learn more about EarthCODE",
+    embedUrl:
+      "https://www.youtube-nocookie.com/embed/6PW-0xnZ9kU?start=40&autoplay=1&mute=1&controls=1&rel=0&playsinline=1&enablejsapi=1&modestbranding=1",
+  },
 };
 
 export const privacyNoticeContent: PrivacyNoticeContent = {
@@ -1395,7 +1404,7 @@ export const trainingVideos: TrainingVideo[] = [
       "A practical session on using agentic AI to support FAIR workflows, with an emphasis on reproducibility, reusable process design, and open-science delivery.",
   },
   {
-    title: "FAIR and Open Science for Earth Sciences with ESA EarthCODE",
+    title: "FAIR and Open Science for Earth Sciences with ESA",
     source: "FOSS4G:UK",
     url: "https://www.youtube.com/watch?v=lqIPHpNGL2U",
     youtubeId: "lqIPHpNGL2U",
@@ -1436,14 +1445,14 @@ export const trainingEvents: TrainingEvent[] = [
     status: "past",
   },
   {
-    title: "FAIR and Open Science for Earth Sciences with ESA EarthCODE",
+    title: "FAIR and Open Science for Earth Sciences with ESA",
     date: "October 2, 2025",
     format: "FOSS4G:UK talk, Leeds",
     status: "past",
     link: "https://talks.osgeo.org/foss4g-uk-2025/talk/KYMRGJ/",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     date: "October 1, 2025",
     format: "FOSS4G:UK workshop, Leeds",
     status: "past",
@@ -1458,14 +1467,14 @@ export const trainingEvents: TrainingEvent[] = [
   },
   {
     title:
-      "EarthCODE - Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
+      "Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
     date: "September 15, 2025",
     format: "EUMETSAT 2025 conference presentation, Lyon",
     status: "past",
     link: "https://program-eumetsat2025.kuoni-congress.info/presentation/earthcode-advancing-open-science-and-fair-practices-for-enhanced-earth-observation-transparency-collaboration-and-data-reuse",
   },
   {
-    title: "EDC & Pangeo Integration on EarthCODE",
+    title: "EDC & Pangeo Workshop",
     date: "June 25, 2025",
     format: "LPS25 demo, EO Arena, Vienna",
     status: "past",
@@ -1479,14 +1488,14 @@ export const trainingEvents: TrainingEvent[] = [
     link: "https://lps25.esa.int/programme/programme-session/?id=E8D71CE6-246F-4734-BD5D-971C4046B714",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     date: "June 23, 2025",
     format: "LPS25 hands-on training, Vienna",
     status: "past",
     link: "https://lps25.esa.int/programme/programme-session/?id=3B4C896E-8D9E-4240-BB85-F95BC638BD2B",
   },
   {
-    title: "FAIR and Open Science with EarthCODE Integrated Platforms",
+    title: "FAIR and Open Science with Earth Observation Platforms",
     date: "June 22, 2025",
     format: "LPS25 tutorial, Vienna",
     status: "past",

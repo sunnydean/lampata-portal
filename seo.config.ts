@@ -242,7 +242,7 @@ const pages: SeoPage[] = [
             title: "Recent sessions and public material",
             body: list([
               "Creating FAIR Workflows with Agentic AI.",
-              "FAIR and Open Science for Earth Sciences with ESA EarthCODE.",
+              "FAIR and Open Science for Earth Sciences with ESA.",
               "FAIR and Open Science in Action: An Introduction to EarthCODE.",
               "EarthCODE workshops and talks at FOSS4G:UK, EUMETSAT, and Living Planet Symposium 2025.",
             ]),

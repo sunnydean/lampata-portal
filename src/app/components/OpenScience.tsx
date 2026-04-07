@@ -52,7 +52,7 @@ export function OpenScience() {
 
                 <p className="section-eyebrow mb-4">Research archive</p>
                 <h3 className="font-display max-w-2xl text-[1.7rem] leading-[0.98] tracking-[-0.06em] text-[#00458b] sm:text-[2.6rem]">
-                  {researchItem.title} that open into the full body of work.
+                  {researchItem.title} & Research.
                 </h3>
                 <p className="mt-4 max-w-2xl text-[0.95rem] leading-7 text-[#00458b]/74 sm:mt-5 sm:text-base sm:leading-8">
                   {researchItem.description}

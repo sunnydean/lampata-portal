@@ -68,7 +68,7 @@ export const publications: Publication[] = [
       "Signals deeper machine learning experience that underpins present geo-spatial AI work, while remaining secondary to the site's core themes.",
   },
   {
-    title: "Lampata engineering report for the OGC Open Science Persistent Demonstrator (OSPD)",
+    title: "OGC Open Science Persistent Demonstrator (OSPD)",
     venue: "OGC",
     year: 2025,
     kind: "Report",
@@ -76,7 +76,7 @@ export const publications: Publication[] = [
       "Captures forthcoming OGC engineering-report work around reproducible, standards-aware open-science workflows, with final release details still pending.",
   },
   {
-    title: "EarthCODE poster",
+    title: "EO for Europe",
     venue: "EuroGEO Workshop",
     year: 2025,
     kind: "Conference",
@@ -85,7 +85,7 @@ export const publications: Publication[] = [
       "Adds EuroGEO Workshop 2025 poster visibility for EarthCODE's FAIR and open-science work, linked through the public e-poster gallery.",
   },
   {
-    title: "FAIR and Open Science for Earth Sciences with ESA EarthCODE",
+    title: "FAIR and Open Science for Earth Sciences with ESA",
     venue: "FOSS4G:UK",
     year: 2025,
     kind: "Conference",
@@ -94,7 +94,7 @@ export const publications: Publication[] = [
       "A public FOSS4G:UK talk on ESA EarthCODE, open-science delivery, and reproducible Earth observation workflows.",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     venue: "FOSS4G:UK",
     year: 2025,
     kind: "Conference",
@@ -113,7 +113,7 @@ export const publications: Publication[] = [
   },
   {
     title:
-      "EarthCODE - Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
+      "Advancing Open Science and FAIR practices for enhanced Earth Observation transparency, collaboration, and data reuse",
     venue: "EUMETSAT 2025",
     year: 2025,
     kind: "Conference",
@@ -131,7 +131,7 @@ export const publications: Publication[] = [
       "Adds a peer-reviewed proceedings paper focused on turning FAIR and open-science principles into practical Earth system science delivery through EarthCODE.",
   },
   {
-    title: "EDC & Pangeo Integration on EarthCODE",
+    title: "EDC & Pangeo Workshop",
     venue: "Living Planet Symposium",
     year: 2025,
     kind: "Conference",
@@ -149,7 +149,7 @@ export const publications: Publication[] = [
       "A Living Planet Symposium demo introducing EarthCODE's collaborative open-development model for FAIR and open Earth system science.",
   },
   {
-    title: "EarthCODE 101 Hands-On Workshop",
+    title: "Open Science 101 Hands-On Workshop",
     venue: "Living Planet Symposium",
     year: 2025,
     kind: "Conference",
@@ -158,7 +158,7 @@ export const publications: Publication[] = [
       "A Living Planet Symposium workshop on accessing EarthCODE datasets and workflows, then publishing reproducible experiments.",
   },
   {
-    title: "FAIR and Open Science with EarthCODE Integrated Platforms",
+    title: "FAIR and Open Science with Earth Observation Platforms",
     venue: "Living Planet Symposium",
     year: 2025,
     kind: "Conference",
@@ -167,7 +167,7 @@ export const publications: Publication[] = [
       "A Living Planet Symposium tutorial on FAIR assessment, integrated EarthCODE platforms, and publishing open EO experiments.",
   },
   {
-    title: "EarthCODE - a FAIR and Open Environment for collaborative research in Earth System Science",
+    title: "A FAIR and Open Environment for collaborative research in Earth System Science",
     venue: "EGU General Assembly",
     year: 2025,
     kind: "Conference",

@@ -46,7 +46,7 @@ export function TrustStrip({ className }: TrustStripProps) {
                   src={ogcSiteLogo}
                   alt={partner.label}
                   decoding="async"
-                  className="h-6.5 w-auto object-contain [filter:brightness(0)_saturate(100%)_invert(16%)_sepia(88%)_saturate(2410%)_hue-rotate(197deg)_brightness(93%)_contrast(102%)] md:h-9"
+                  className="h-[2.03125rem] w-auto object-contain [filter:brightness(0)_saturate(100%)_invert(16%)_sepia(88%)_saturate(2410%)_hue-rotate(197deg)_brightness(93%)_contrast(102%)] md:h-[2.8125rem]"
                 />
               </div>
             ) : (
