@@ -95,7 +95,7 @@ export interface CapabilityPillar {
 }
 
 export interface CaseStudy {
-  visual: "ogc" | "urban" | "antarctica" | "sustainability" | "emr";
+  visual: "ogc" | "urban" | "antarctica" | "sustainability" | "emr" | "esb";
   badge: string;
   metric: string;
   title: string;

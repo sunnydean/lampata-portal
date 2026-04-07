@@ -442,6 +442,138 @@ function SustainabilityVisual({ badge, metric }: { badge: string; metric: string
   );
 }
 
+function ESBVisual({ badge, metric }: { badge: string; metric: string }) {
+  const AZ = "#0078d4";
+  const GD = "#f5d704";
+  const LB = "#5ab4e8";
+
+  // 4 nodes per row — wider spacing so boxes can breathe
+  const top = [
+    { cx: 55,  label: "CRM"     },
+    { cx: 150, label: "PORTAL"  },
+    { cx: 250, label: "MOBILE"  },
+    { cx: 345, label: "INSIGHTS"},
+  ];
+  const bot = [
+    { cx: 55,  label: "SQL DB" },
+    { cx: 150, label: "EVENTS" },
+    { cx: 250, label: "LEGACY" },
+    { cx: 345, label: "APIs"   },
+  ];
+
+  return (
+    <div className="cs-visual" style={{ background: "linear-gradient(135deg, #453aa8 0%, #202210 50%, #1c0c10 100%)" }}>
+      <svg
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        viewBox="0 0 400 200"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <defs>
+          <pattern id="esbGridPat" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,120,212,0.05)" strokeWidth="0.5" />
+          </pattern>
+          <linearGradient id="esbBusFill" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stopColor="rgba(0,100,200,0.08)" />
+            <stop offset="40%"  stopColor="rgba(0,120,212,0.26)" />
+            <stop offset="60%"  stopColor="rgba(0,120,212,0.26)" />
+            <stop offset="100%" stopColor="rgba(0,100,200,0.08)" />
+          </linearGradient>
+        </defs>
+
+        <rect width="400" height="200" fill="url(#esbGridPat)" />
+
+        {/* AZURE · C# label */}
+        <text x="386" y="17" textAnchor="end" fill="rgba(0,120,212,0.7)" fontSize="6" fontWeight="700" letterSpacing="0.14em">AZURE · C#</text>
+
+        {/* Soft glow behind ESB band */}
+        <rect x="5" y="79" width="390" height="42" rx="4" fill="rgba(0,120,212,0.06)" />
+
+        {/* === TOP NODES (box: 72×30, y=10–40) === */}
+        {top.map(({ cx, label }, i) => (
+          <g key={label}>
+            <rect x={cx - 36} y={10} width={72} height={30} rx="4"
+              fill="rgba(255,255,255,0.05)" stroke="rgba(0,120,212,0.45)" strokeWidth="1" />
+            <rect x={cx - 36} y={10} width={72} height={3} rx="1.5" fill={AZ} opacity="0.6" />
+            <text x={cx} y={30} textAnchor="middle"
+              fill="rgba(255,255,255,0.82)" fontSize="7.5" fontWeight="700" letterSpacing="0.07em">{label}</text>
+            {/* Connector */}
+            <line x1={cx} y1={40} x2={cx} y2={80}
+              stroke="rgba(0,120,212,0.25)" strokeWidth="1" strokeDasharray="3,3" />
+            {/* Junction dot */}
+            <circle cx={cx} cy={80} r="2.8" fill={AZ} opacity="0.7">
+              <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
+            </circle>
+            {/* Packet bus → app */}
+            <circle cx={cx} r="2.2" fill={GD}>
+              <animate attributeName="cy" from="80" to="42" dur="1.8s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.08;0.84;1"
+                dur="1.8s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
+            </circle>
+          </g>
+        ))}
+
+        {/* === ESB BAND (y=80–120, height=40) === */}
+        <rect x="10" y="80" width="380" height="40" rx="3"
+          fill="url(#esbBusFill)" stroke="rgba(0,120,212,0.6)" strokeWidth="1" />
+        <line x1="12" y1="82"  x2="388" y2="82"  stroke="rgba(0,160,255,0.15)" strokeWidth="0.6" />
+        <line x1="12" y1="118" x2="388" y2="118" stroke="rgba(0,160,255,0.1)"  strokeWidth="0.6" />
+
+        <text x="200" y="104" textAnchor="middle"
+          fill="rgba(255,255,255,0.9)" fontSize="9" fontWeight="800" letterSpacing="0.13em">
+          ENTERPRISE SERVICE BUS
+        </text>
+
+        {/* Gold packets left → right */}
+        {[0, 1, 2, 3, 4].map((i) => (
+          <circle key={i} cy="93" r="1.8" fill={GD}>
+            <animate attributeName="cx" from="15" to="385"
+              dur={`${2.2 + i * 0.32}s`} begin={`${i * 0.52}s`} repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0;0.85;0.85;0" keyTimes="0;0.05;0.93;1"
+              dur={`${2.2 + i * 0.32}s`} begin={`${i * 0.52}s`} repeatCount="indefinite" />
+          </circle>
+        ))}
+        {/* Blue packets right → left */}
+        {[0, 1].map((i) => (
+          <circle key={i} cy="108" r="1.4" fill={LB}>
+            <animate attributeName="cx" from="385" to="15"
+              dur={`${3.1 + i * 0.5}s`} begin={`${i * 1.3}s`} repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0;0.5;0.5;0" keyTimes="0;0.05;0.93;1"
+              dur={`${3.1 + i * 0.5}s`} begin={`${i * 1.3}s`} repeatCount="indefinite" />
+          </circle>
+        ))}
+
+        {/* === BOTTOM NODES (box: 72×30, y=160–190) === */}
+        {bot.map(({ cx, label }, i) => (
+          <g key={label}>
+            {/* Junction dot */}
+            <circle cx={cx} cy={120} r="2.4" fill={LB} opacity="0.6">
+              <animate attributeName="opacity" values="0.6;0.15;0.6" dur="2.2s" begin={`${i * 0.43}s`} repeatCount="indefinite" />
+            </circle>
+            {/* Connector */}
+            <line x1={cx} y1={120} x2={cx} y2={160}
+              stroke="rgba(90,180,232,0.22)" strokeWidth="1" strokeDasharray="3,3" />
+            {/* Packet source → bus */}
+            <circle cx={cx} r="2.2" fill={LB}>
+              <animate attributeName="cy" from="158" to="122" dur="2s" begin={`${i * 0.43}s`} repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.85;1"
+                dur="2s" begin={`${i * 0.43}s`} repeatCount="indefinite" />
+            </circle>
+            {/* Box */}
+            <rect x={cx - 36} y={160} width={72} height={30} rx="4"
+              fill="rgba(255,255,255,0.05)" stroke="rgba(90,180,232,0.38)" strokeWidth="1" />
+            <rect x={cx - 36} y={187} width={72} height={3} rx="1.5" fill={LB} opacity="0.42" />
+            <text x={cx} y={180} textAnchor="middle"
+              fill="rgba(255,255,255,0.72)" fontSize="7.5" fontWeight="700" letterSpacing="0.07em">{label}</text>
+          </g>
+        ))}
+      </svg>
+      <span className="cs-badge">{badge}</span>
+      <span className="cs-metric">{metric}</span>
+    </div>
+  );
+}
+
 function EMRVisual({ badge, metric }: { badge: string; metric: string }) {
   const MG = "#4ac9a0"; // medical green — health indicators
   const GD = "#f5d704"; // brand gold    — DoH hub / primary data flow
@@ -637,6 +769,7 @@ export function CaseStudies() {
                 {study.visual === "antarctica" && <AntarcticaVisual badge={study.badge} metric={study.metric} />}
                 {study.visual === "sustainability" && <SustainabilityVisual badge={study.badge} metric={study.metric} />}
                 {study.visual === "emr" && <EMRVisual badge={study.badge} metric={study.metric} />}
+                {study.visual === "esb" && <ESBVisual badge={study.badge} metric={study.metric} />}
 
                 <div className="cs-body">
                   <h3>{study.title}</h3>

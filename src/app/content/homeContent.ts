@@ -574,8 +574,20 @@ export const caseStudies: CaseStudy[] = [
       "We developed an electronic medical record system for a large UK charity serving hospitals in developing countries, later deployed across multiple hospitals and integrated directly into the government's Department of Health systems.",
       "The platform features a client portal, a distributed resilient architecture designed for disconnected environments, and custom data replication mechanisms - ensuring patient records remain consistent and accessible even without reliable connectivity.",
     ],
-    outcomes: ["Dept. of Health integration", "Disconnected-environment resilience", "Multi-hospital deployment"],
+    outcomes: ["DoH integration", "Disconnected resilience", "Distributed Architecture"],
     client: "Healthcare technology · EMR engineering · Distributed systems",
+  },
+  {
+    visual: "esb",
+    badge: "Enterprise · Data Integration",
+    metric: "FTSE 250 Real-Estate Enterprise",
+    title: "Azure ESB Data Integration Platform",
+    description: [
+      "We helped architect and develop a data integration layer for a FTSE 250 real-estate enterprise, leveraging a service-oriented architecture built on Microsoft Azure SaaS and PaaS services with C#.",
+      "This unlocked siloed data for analytics and made it available for downstream application integration in a sustainable, scalable way - transforming fragmented data operations into a coherent enterprise platform.",
+    ],
+    outcomes: ["Azure SOA", "FTSE 250", "Enterprise ESB", "Scalable data ops"],
+    client: "Enterprise software · Azure · Data integration · C#",
   },
 ];
 
