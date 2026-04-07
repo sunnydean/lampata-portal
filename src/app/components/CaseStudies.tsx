@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useLayoutEffect } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { caseStudies } from "../content/homeContent";
 import antarcticaImg800 from "@/assets/antarctica-800.webp";
@@ -688,22 +688,18 @@ function EMRVisual({ badge, metric }: { badge: string; metric: string }) {
 
 export function CaseStudies() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const isDraggingRef = useRef(false);
   const dragOrigin = useRef({ x: 0, scrollLeft: 0 });
 
-  const updateArrows = useCallback(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 8);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 8);
-  }, []);
+  // Render items × 3 so the carousel loops seamlessly in both directions
+  const tripled = [...caseStudies, ...caseStudies, ...caseStudies];
 
-  useEffect(() => {
-    updateArrows();
-  }, [updateArrows]);
+  // Start scrolled to the middle copy so both directions have room
+  useLayoutEffect(() => {
+    const el = trackRef.current;
+    if (el) el.scrollLeft = el.scrollWidth / 3;
+  }, []);
 
   const scrollCard = (dir: "prev" | "next") => {
     const el = trackRef.current;
@@ -711,6 +707,23 @@ export function CaseStudies() {
     const card = el.querySelector<HTMLElement>(".cs-card");
     const cardWidth = card ? card.offsetWidth + 28 : 408;
     el.scrollBy({ left: dir === "next" ? cardWidth : -cardWidth, behavior: "smooth" });
+  };
+
+  // Silently jump back into the middle copy when the user reaches a clone boundary.
+  // We force scrollBehavior to auto so the assignment is always instantaneous.
+  const onScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const setWidth = el.scrollWidth / 3;
+    if (el.scrollLeft >= setWidth * 2) {
+      el.style.scrollBehavior = "auto";
+      el.scrollLeft -= setWidth;
+      el.style.scrollBehavior = "";
+    } else if (el.scrollLeft < setWidth) {
+      el.style.scrollBehavior = "auto";
+      el.scrollLeft += setWidth;
+      el.style.scrollBehavior = "";
+    }
   };
 
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -743,12 +756,7 @@ export function CaseStudies() {
         </div>
 
         <div className="cs-carousel-wrapper">
-          <button
-            className="cs-arrow cs-arrow-prev"
-            onClick={() => scrollCard("prev")}
-            aria-label="Previous case study"
-            style={{ opacity: canScrollLeft ? 1 : 0, pointerEvents: canScrollLeft ? "auto" : "none" }}
-          >
+          <button className="cs-arrow cs-arrow-prev" onClick={() => scrollCard("prev")} aria-label="Previous case study">
             <ChevronLeft className="h-5 w-5" />
           </button>
 
@@ -759,11 +767,11 @@ export function CaseStudies() {
             onMouseMove={onMouseMove}
             onMouseUp={onDragEnd}
             onMouseLeave={onDragEnd}
-            onScroll={updateArrows}
+            onScroll={onScroll}
             style={{ cursor: isDragging ? "grabbing" : "grab", userSelect: isDragging ? "none" : undefined }}
           >
-            {caseStudies.map((study) => (
-              <article key={study.title} className="cs-card">
+            {tripled.map((study, i) => (
+              <article key={i} className="cs-card">
                 {study.visual === "ogc" && <OGCVisual badge={study.badge} metric={study.metric} />}
                 {study.visual === "urban" && <UrbanVisual badge={study.badge} metric={study.metric} />}
                 {study.visual === "antarctica" && <AntarcticaVisual badge={study.badge} metric={study.metric} />}
@@ -773,12 +781,10 @@ export function CaseStudies() {
 
                 <div className="cs-body">
                   <h3>{study.title}</h3>
-                  {study.description.map((para, i) => <p key={i}>{para}</p>)}
+                  {study.description.map((para, j) => <p key={j}>{para}</p>)}
                   <div className="cs-outcomes">
                     {study.outcomes.map((outcome) => (
-                      <div key={outcome} className="cs-outcome">
-                        {outcome}
-                      </div>
+                      <div key={outcome} className="cs-outcome">{outcome}</div>
                     ))}
                   </div>
                   <div className="cs-client">
@@ -801,12 +807,7 @@ export function CaseStudies() {
             ))}
           </div>
 
-          <button
-            className="cs-arrow cs-arrow-next"
-            onClick={() => scrollCard("next")}
-            aria-label="Next case study"
-            style={{ opacity: canScrollRight ? 1 : 0, pointerEvents: canScrollRight ? "auto" : "none" }}
-          >
+          <button className="cs-arrow cs-arrow-next" onClick={() => scrollCard("next")} aria-label="Next case study">
             <ChevronRight className="h-5 w-5" />
           </button>
         </div>

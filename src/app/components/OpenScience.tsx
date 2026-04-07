@@ -1,5 +1,6 @@
 import { ArrowUpRight, Building2, FlaskConical, Landmark, Leaf } from "lucide-react";
 import { lazy, Suspense, useState } from "react";
+import urbanBackgroundResearch from "../../assets/urban_background_research.webp";
 import {
   audienceSegments,
   featuredPublications,
@@ -24,147 +25,152 @@ export function OpenScience() {
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [archiveRequested, setArchiveRequested] = useState(false);
   const researchItem = openScienceItems.find((item) => item.icon === "research");
+  const visibleFeaturedPublications = featuredPublications.slice(0, 3);
+  const handleArchiveOpen = () => {
+    setArchiveRequested(true);
+    setArchiveOpen(true);
+  };
 
   return (
-    <section className="bg-white px-6 py-[4.5rem] md:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-0 flex max-w-5xl flex-col gap-3 md:gap-4">
-          <span className="section-eyebrow self-start">Open science & research</span>
-          <h2 className="section-title max-w-5xl text-balance text-left">
-            Open methods are part of the product, not a side note.
-          </h2>
-          <p className="section-copy max-w-4xl text-left">
-            Lampata stands out when the work needs to be explainable, reproducible, and
-            supported by methods that can hold up beyond a single project.
-          </p>
-        </div>
+    <section className="relative overflow-visible bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_52%,#ffffff_100%)] px-6 py-[4.5rem] md:py-24">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[-13rem] top-[-5rem] h-[28rem] w-[28rem] overflow-hidden rounded-full opacity-[0.18] mix-blend-multiply [mask-image:linear-gradient(90deg,#000_0%,#000_58%,rgba(0,0,0,0.62)_78%,rgba(0,0,0,0.18)_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(90deg,#000_0%,#000_58%,rgba(0,0,0,0.62)_78%,rgba(0,0,0,0.18)_92%,transparent_100%)] sm:left-[-14rem] sm:top-[-6rem] sm:h-[34rem] sm:w-[34rem] md:left-[-17rem] md:top-[-6.5rem] md:h-[42rem] md:w-[42rem] lg:left-[-19rem] lg:top-[-7rem] lg:h-[48rem] lg:w-[48rem] xl:left-[-21rem] xl:top-[-7.5rem] xl:h-[54rem] xl:w-[54rem]"
+      >
+        <img
+          src={urbanBackgroundResearch}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full -rotate-[7deg] object-cover saturate-[1.1] contrast-[1.04] scale-[1.03]"
+        />
+      </div>
 
-        {researchItem ? (
-          <Reveal
-            delay={120}
-            className="mt-5 overflow-hidden rounded-[1rem] border border-[#00458b]/10 bg-[linear-gradient(135deg,rgba(245,215,4,0.2),rgba(255,255,255,0.98)_48%,rgba(0,69,139,0.06))] shadow-[0_32px_70px_-52px_rgba(0,69,139,0.24)] md:mt-6"
-          >
-            <div className="grid gap-6 p-5 sm:p-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-8">
-              <div>
-                <div className="brand-gold-fill mb-5 flex h-14 w-14 items-center justify-center rounded-2xl text-[#00458b]">
-                  <FlaskConical className="h-6 w-6" />
-                </div>
-
-                <p className="section-eyebrow mb-4">Research archive</p>
-                <h3 className="font-display max-w-2xl text-[1.7rem] leading-[0.98] tracking-[-0.06em] text-[#00458b] sm:text-[2.6rem]">
-                  {researchItem.title} & Research.
-                </h3>
-                <p className="mt-4 max-w-2xl text-[0.95rem] leading-7 text-[#00458b]/74 sm:mt-5 sm:text-base sm:leading-8">
-                  {researchItem.description}
-                </p>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setArchiveRequested(true);
-                    setArchiveOpen(true);
-                  }}
-                  className="brand-gold-button mt-7 inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold text-[#00458b] transition-transform duration-200 hover:-translate-y-0.5"
-                >
-                  See Related Publications
-                  <ArrowUpRight className="h-4 w-4" />
-                </button>
-
-                {archiveRequested ? (
-                  <Suspense fallback={null}>
-                    <OpenScienceArchiveDialog
-                      open={archiveOpen}
-                      onOpenChange={setArchiveOpen}
-                    />
-                  </Suspense>
-                ) : null}
-              </div>
-
-              <div className="panel-surface hidden rounded-[0.9rem] p-6 md:block">
-                <p className="section-eyebrow mb-4">Inside the archive</p>
-                <div className="space-y-3">
-                  {featuredPublications.map((publication) => (
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="grid gap-5 md:gap-6 lg:grid-cols-[1.02fr_0.98fr] lg:grid-rows-[auto_1fr] lg:items-stretch">
+          {researchItem ? (
+            <Reveal className="order-2 lg:order-none lg:col-start-1 lg:row-span-2">
+              <div className="panel-surface h-full overflow-hidden rounded-[0.75rem]">
+                <div className="grid h-full lg:grid-rows-[0.8fr_0.2fr]">
+                  <div className="relative min-h-[31rem] overflow-hidden bg-[linear-gradient(140deg,rgba(245,215,4,0.18),rgba(255,255,255,0.88)_50%,rgba(0,69,139,0.08))] sm:min-h-[36rem]">
                     <div
-                      key={`${publication.title}-${publication.venue}-${publication.year}`}
-                      className="brand-gold-border-left border-l-2 pl-3"
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.76),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.12))]"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="absolute left-1/2 top-1/2 h-[46rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full sm:h-[56rem] sm:w-[56rem] lg:h-[64rem] lg:w-[64rem]"
                     >
-                      <p className="text-sm font-semibold leading-6 text-[#00458b]">
-                        {publication.title}
-                      </p>
-                      <p className="text-sm leading-6 text-[#00458b]/58">
-                        {publication.venue} · {publication.year}
-                      </p>
+                      <img
+                        src={urbanBackgroundResearch}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full -rotate-[2deg] object-cover object-center saturate-[1.1] contrast-[1.05]"
+                      />
                     </div>
-                  ))}
+                    <div className="relative h-full min-h-[31rem] sm:min-h-[36rem]" />
+                  </div>
+
+                  <div className="border-t border-[#00458b]/10 bg-white px-5 py-5 sm:px-6 sm:py-6">
+                    <div className="flex h-full flex-col">
+                      <div className="brand-gold-fill mb-4 flex h-12 w-12 items-center justify-center rounded-xl text-[#00458b]">
+                        <FlaskConical className="h-5 w-5" />
+                      </div>
+                      <p className="section-eyebrow mb-3">Research archive</p>
+                      <h3 className="font-display max-w-lg text-[1.85rem] leading-[0.96] tracking-[-0.06em] text-[#00458b] sm:text-[2.4rem]">
+                        {researchItem.title} & Research.
+                      </h3>
+                      {researchItem.description ? (
+                        <p className="mt-4 max-w-xl text-sm leading-7 text-[#00458b]/76">
+                          {researchItem.description}
+                        </p>
+                      ) : null}
+                      <button
+                        type="button"
+                        onClick={handleArchiveOpen}
+                        className="mt-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-[#00458b] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00458b]/28 sm:mt-6"
+                      >
+                        Browse the full archive
+                        <ArrowUpRight className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleArchiveOpen}
+                        className="mt-5 rounded-[1rem] border border-[#00458b]/10 bg-[#f8fbff] p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-[#00458b]/18 hover:shadow-[0_20px_40px_-34px_rgba(0,69,139,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00458b]/28 sm:mt-6 sm:p-5"
+                        aria-label="Open the full research archive from recent publications"
+                      >
+                        <span className="block text-[0.74rem] font-semibold uppercase tracking-[0.24em] text-[#00458b]/54">
+                          Recent publications
+                        </span>
+                        <span className="mt-3 block space-y-3">
+                          {visibleFeaturedPublications.map((publication) => (
+                            <span
+                              key={`${publication.title}-${publication.venue}-${publication.year}`}
+                              className="brand-gold-border-left block border-l-2 pl-3"
+                            >
+                              <span className="block text-[0.96rem] font-semibold leading-6 text-[#00458b]">
+                                {publication.title}
+                              </span>
+                              <span className="block text-[0.78rem] leading-5 text-[#00458b]/56 sm:text-sm sm:leading-6">
+                                {publication.venue} · {publication.year}
+                              </span>
+                            </span>
+                          ))}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </Reveal>
+          ) : null}
+
+          <div className="order-1 lg:order-none lg:col-start-2 lg:row-start-1">
+            <div className="mb-0 flex max-w-3xl flex-col gap-4 text-center lg:ml-auto lg:text-left">
+              <span className="section-eyebrow self-center lg:self-start">
+                Open science & research
+              </span>
+              <h2 className="section-title max-w-4xl text-balance">
+                We Believe in Open Source, Open Science for Everyone.
+              </h2>
             </div>
-          </Reveal>
-        ) : null}
+          </div>
 
-        <div className="mt-5 grid gap-5 md:mt-6 md:gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <Reveal
-            className="panel-surface flex flex-col rounded-[0.75rem] p-6 md:p-8"
-          >
-            <p className="section-eyebrow mb-5">Where this shows up</p>
-            <h3 className="font-display text-2xl leading-tight tracking-[-0.06em] text-[#00458b]">
-              Bridging the gap between research and business applications.
-            </h3>
-            <span className="yellow-rule mt-4 w-12" />
-
-            <p className="mt-5 text-sm leading-7 text-[#00458b]/76 md:mt-6">
-              The same research standards show up across the client work: space-agency
-              programmes, research institutions, public-interest analysis, and commercial
-              teams that need delivery to hold up after the first prototype.
-            </p>
-
-            <div className="mt-5 grow space-y-2 md:mt-6">
-              {[
-                "Operational GIS workflows and analyst tooling",
-                "Reusable research methods and FAIR publishing patterns",
-                "Sustainability, mobility, and built-environment analysis",
-                "Prototype-to-production paths with documented handoff",
-                "Evidence that can be inspected, reused, and defended",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="brand-gold-border-left border-l-2 pl-3 text-sm leading-6 text-[#00458b]/76"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </Reveal>
-
-          <div className="grid gap-5 sm:grid-cols-2 md:gap-6">
+          <div className="order-3 grid gap-4 sm:grid-cols-2 lg:order-none lg:col-start-2 lg:row-start-2 lg:h-full lg:grid-cols-2 lg:grid-rows-2 lg:auto-rows-fr">
             {audienceSegments.map((segment, index) => {
               const Icon = audienceIconMap[segment.icon];
 
               return (
                 <Reveal
+                  as="article"
                   key={segment.title}
                   delay={index * 80}
-                  className="panel-surface flex h-full flex-col rounded-[0.75rem] p-5 md:p-6"
+                  className="brand-gold-border-top panel-surface flex h-full flex-col rounded-[0.75rem] border-t-4 p-5 sm:p-6"
                 >
                   <div className="brand-gold-fill mb-5 flex h-12 w-12 items-center justify-center rounded-xl text-[#00458b]">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="font-display text-xl leading-tight tracking-[-0.05em] text-[#00458b]">
+                  <h3 className="font-display text-[1.42rem] leading-tight tracking-[-0.05em] text-[#00458b] sm:text-[1.55rem]">
                     {segment.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[#00458b]/76">{segment.summary}</p>
-                  <div className="mt-5 hidden flex-wrap gap-2 md:flex">
-                    {segment.outcomes.map((outcome) => (
-                      <span key={outcome} className="tag-mono text-[#00458b]/82">
-                        {outcome}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="mt-3 text-sm leading-6 text-[#00458b]/76 sm:mt-4 sm:leading-7">
+                    {segment.summary}
+                  </p>
                 </Reveal>
               );
             })}
           </div>
         </div>
+
+        {archiveRequested ? (
+          <Suspense fallback={null}>
+            <OpenScienceArchiveDialog
+              open={archiveOpen}
+              onOpenChange={setArchiveOpen}
+            />
+          </Suspense>
+        ) : null}
       </div>
     </section>
   );

@@ -2,6 +2,7 @@
 
 todo
 - add more case studies from lampata eu website
+- run spatial classification of buildings on Cambridge and change the map tile to that as a custom map tiles
 - create the image stack thing ----
 - News and Workshops
 - fix up training page

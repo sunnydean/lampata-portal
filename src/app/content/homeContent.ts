@@ -640,8 +640,7 @@ export const openScienceItems: OpenScienceItem[] = [
   {
     icon: "research",
     title: "Publications",
-    description:
-      "Lampata's research work across geospatial, urban analytics, mobility data, FAIR open science, and Earth observation.",
+    description: "",
     details: [],
   },
   {
@@ -668,6 +667,16 @@ export const openScienceItems: OpenScienceItem[] = [
 ];
 
 export const featuredPublications: Publication[] = [
+  {
+    title:
+      "The hierarchical morphotope classification: A theory-driven framework for large-scale analysis of built form",
+    venue: "Cities",
+    year: 2026,
+    kind: "Journal",
+    href: "https://www.sciencedirect.com/science/article/pii/S0264275126002799",
+    summary:
+      "Strengthens Lampata's urban morphology and built-form analysis story with a scalable, theory-driven framework for classifying urban structure at large scale.",
+  },
   {
     title:
       "Urban exodus? Understanding human mobility in Britain during the COVID-19 pandemic using Meta-Facebook data",
@@ -709,6 +718,16 @@ export const featuredPublications: Publication[] = [
 ];
 
 export const publications: Publication[] = [
+  {
+    title:
+      "The hierarchical morphotope classification: A theory-driven framework for large-scale analysis of built form",
+    venue: "Cities",
+    year: 2026,
+    kind: "Journal",
+    href: "https://www.sciencedirect.com/science/article/pii/S0264275126002799",
+    summary:
+      "Strengthens Lampata's urban morphology and built-form analysis story with a scalable, theory-driven framework for classifying urban structure at large scale.",
+  },
   {
     title:
       "Urban exodus? Understanding human mobility in Britain during the COVID-19 pandemic using Meta-Facebook data",

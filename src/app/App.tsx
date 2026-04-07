@@ -37,12 +37,14 @@ export default function App() {
         <DeferredSection
           sectionId="earthcode"
           component={EarthcodeSection}
+          sectionClassName="relative z-20"
           placeholderClassName="px-6 pb-[4.5rem] pt-8 md:pb-28 md:pt-0 lg:pb-32 lg:pt-2"
           fallbackClassName="h-[26rem] md:h-[34rem]"
         />
         <DeferredSection
           sectionId="open-science"
           component={DeferredOpenScience}
+          sectionClassName="relative z-10"
           placeholderClassName="bg-white px-6 py-[4.5rem] md:py-24"
           fallbackClassName="h-[36rem] md:h-[40rem]"
         />

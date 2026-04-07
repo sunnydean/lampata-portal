@@ -452,7 +452,6 @@
 
   .case-studies-reference {
     position: relative;
-    overflow: hidden;
     background: #f9fafb;
     padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 4rem);
   }
@@ -479,13 +478,14 @@
     display: flex;
     gap: 1.75rem;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
+    overflow-anchor: none;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-bottom: 6px;
-    margin-bottom: -6px;
+    padding: 12px 12px 18px;
+    margin: -12px -12px -18px;
     cursor: grab;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
   }
 
   .cs-grid::-webkit-scrollbar {
@@ -496,7 +496,6 @@
     position: relative;
     z-index: 2;
     flex: 0 0 380px;
-    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -754,7 +753,6 @@
 
     .cs-card {
       flex: 0 0 calc(100vw - 2rem);
-      scroll-snap-align: center;
     }
 
     .cs-visual {

@@ -3,7 +3,6 @@ import { publications } from "../content/openScienceArchiveContent";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
@@ -27,9 +26,6 @@ export function OpenScienceArchiveDialog({
             <DialogTitle className="font-display text-[1.32rem] leading-[1.02] tracking-[-0.06em] text-[#00458b] sm:text-[2.4rem]">
               Publications, talks, workshops, and research outputs
             </DialogTitle>
-            <DialogDescription className="max-w-3xl text-[0.82rem] leading-5 text-[#00458b]/72 sm:text-sm sm:leading-7">
-              Lampata's research work across geospatial, urban analytics, mobility data, FAIR open science, and Earth observation.
-            </DialogDescription>
           </DialogHeader>
         </div>
 
