@@ -90,7 +90,7 @@ export function OpenScience() {
                         </g>
                       </defs>
 
-                      {/* Lightweight ship overlay: three slow boats following the route centerline with simple bridge/start-stop fades. */}
+                      {/* Lightweight ship overlay: five slow boats following the route centerline with simple bridge/start-stop fades. */}
                       <g opacity="0.88">
                         <g>
                           <use href="#ship-large" />
@@ -124,6 +124,21 @@ export function OpenScience() {
                         </g>
                         <g>
                           <use href="#ship-medium" />
+                          <animateMotion dur="64s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-42s">
+                            <mpath href="#ship-path-down" />
+                          </animateMotion>
+                          <animate
+                            attributeName="opacity"
+                            dur="64s"
+                            repeatCount="indefinite"
+                            calcMode="linear"
+                            begin="-42s"
+                            keyTimes="0;0.012;0.016;0.024;0.028;0.065;0.069;0.094;0.098;0.179;0.183;0.204;0.208;0.339;0.343;0.363;0.367;0.419;0.423;0.445;0.449;0.543;0.547;0.569;0.573;0.677;0.681;0.706;0.710;0.886;0.890;0.900;0.904;1"
+                            values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
+                          />
+                        </g>
+                        <g>
+                          <use href="#ship-medium" />
                           <animateMotion dur="72s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-18s">
                             <mpath href="#ship-path-up" />
                           </animateMotion>
@@ -133,6 +148,21 @@ export function OpenScience() {
                             repeatCount="indefinite"
                             calcMode="linear"
                             begin="-18s"
+                            keyTimes="0;0.084;0.088;0.114;0.118;0.278;0.282;0.323;0.327;0.415;0.419;0.457;0.461;0.539;0.543;0.581;0.585;0.621;0.625;0.661;0.665;0.780;0.784;0.821;0.825;0.890;0.894;0.935;0.939;0.960;0.964;0.988;0.992;1"
+                            values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
+                          />
+                        </g>
+                        <g>
+                          <use href="#ship-small" />
+                          <animateMotion dur="72s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-54s">
+                            <mpath href="#ship-path-up" />
+                          </animateMotion>
+                          <animate
+                            attributeName="opacity"
+                            dur="72s"
+                            repeatCount="indefinite"
+                            calcMode="linear"
+                            begin="-54s"
                             keyTimes="0;0.084;0.088;0.114;0.118;0.278;0.282;0.323;0.327;0.415;0.419;0.457;0.461;0.539;0.543;0.581;0.585;0.621;0.625;0.661;0.665;0.780;0.784;0.821;0.825;0.890;0.894;0.935;0.939;0.960;0.964;0.988;0.992;1"
                             values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
                           />
