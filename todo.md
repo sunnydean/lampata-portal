@@ -1,6 +1,7 @@
 # note to self  todo
 
 todo
+- make an svg of prague and get some moving boats in the svg for good vibes - We Believe in Open Source, Open Science for Everyone section --- improve it
 - add more case studies from lampata eu website
 - run spatial classification of buildings on Cambridge and change the map tile to that as a custom map tiles
 - create the image stack thing ----
