@@ -61,221 +61,82 @@ export function OpenScience() {
                       decoding="async"
                       className="absolute inset-0 h-full w-full object-cover object-center"
                     />
-                    {/* Animated ships — path11762 converted from Inkscape coords */}
                     <svg
                       viewBox="0 0 669.6 378.352075"
                       preserveAspectRatio="xMidYMid slice"
-                      className="absolute inset-0 h-full w-full pointer-events-none"
+                      className="pointer-events-none absolute inset-0 h-full w-full motion-reduce:hidden"
                       aria-hidden="true"
                     >
                       <defs>
                         <path
-                          id="rp-down"
+                          id="ship-path-down"
                           d="M 286.089 378.472 L 286.089 364.317 L 280.874 330.791 L 280.874 319.615 L 277.894 257.033 L 277.894 248.838 L 289.069 154.965 L 292.050 147.515 L 318.870 113.244 L 327.811 111.754 L 396.353 93.873 L 405.293 91.638 L 477.561 64.072 L 487.991 60.347 L 610.175 42.466 L 609.430 40.976 L 655.621 0.000 L 651.896 -0.745"
                         />
                         <path
-                          id="rp-up"
+                          id="ship-path-up"
                           d="M 651.896 -0.745 L 655.621 0.000 L 609.430 40.976 L 610.175 42.466 L 487.991 60.347 L 477.561 64.072 L 405.293 91.638 L 396.353 93.873 L 327.811 111.754 L 318.870 113.244 L 292.050 147.515 L 289.069 154.965 L 277.894 248.838 L 277.894 257.033 L 280.874 319.615 L 280.874 330.791 L 286.089 364.317 L 286.089 378.472"
                         />
+                        <g id="ship-large">
+                          <path d="M -4.1 0 L -3.4 -1.5 L 1.2 -1.5 L 3.4 -0.75 L 4.1 0 L 3.4 0.75 L 1.2 1.5 L -3.4 1.5 Z" fill="#2e4057" />
+                          <rect x="-1.5" y="-0.8" width="2.2" height="1.6" rx="0.3" fill="#3d5a7a" />
+                        </g>
+                        <g id="ship-medium">
+                          <path d="M -3.75 0 L -3.15 -1.35 L 1.05 -1.35 L 3.15 -0.7 L 3.75 0 L 3.15 0.7 L 1.05 1.35 L -3.15 1.35 Z" fill="#2e4057" />
+                          <rect x="-1.35" y="-0.75" width="1.95" height="1.5" rx="0.25" fill="#3d5a7a" />
+                        </g>
+                        <g id="ship-small">
+                          <path d="M -3 0 L -2.6 -1.1 L 0.75 -1.1 L 2.6 -0.6 L 3 0 L 2.6 0.6 L 0.75 1.1 L -2.6 1.1 Z" fill="#1e3a5f" />
+                          <rect x="-1.1" y="-0.6" width="1.65" height="1.2" rx="0.2" fill="#2d5280" />
+                        </g>
                       </defs>
 
-                      {/*
-                        Collision-free strategy:
-                        - All 6 downstream ships share dur=48s, begins spaced 8s apart → they never catch each other.
-                        - All 4 upstream ships share dur=58s, begins spaced ~14.5s apart → same guarantee.
-                        - Downstream ships wobble in the -2.5 band (port), upstream in the +2.5 band (starboard).
-                        - Wobble range ±0.35, so inner ship edges stay at least -2.15+1.5=-0.65 and +2.15-1.5=+0.65
-                          from centreline when passing → ~1.3 SVG unit clear gap between passing hulls.
-                      */}
-
-                      {/* Ship 1 — downstream, large */}
-                      <g>
+                      {/* Lightweight ship overlay: three slow boats following the route centerline with simple bridge/start-stop fades. */}
+                      <g opacity="0.88">
                         <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,-2.5; 0,-2.85; 0,-2.5; 0,-2.15; 0,-2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="17s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -4.1 0 L -3.4 -1.5 L 1.2 -1.5 L 3.4 -0.75 L 4.1 0 L 3.4 0.75 L 1.2 1.5 L -3.4 1.5 Z" fill="#2e4057" />
-                          <rect x="-1.5" y="-0.8" width="2.2" height="1.6" rx="0.3" fill="#3d5a7a" />
+                          <use href="#ship-large" />
+                          <animateMotion dur="64s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="0s">
+                            <mpath href="#ship-path-down" />
+                          </animateMotion>
+                          <animate
+                            attributeName="opacity"
+                            dur="64s"
+                            repeatCount="indefinite"
+                            calcMode="linear"
+                            begin="0s"
+                            keyTimes="0;0.012;0.016;0.024;0.028;0.065;0.069;0.094;0.098;0.179;0.183;0.204;0.208;0.339;0.343;0.363;0.367;0.419;0.423;0.445;0.449;0.543;0.547;0.569;0.573;0.677;0.681;0.706;0.710;0.886;0.890;0.900;0.904;1"
+                            values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
+                          />
                         </g>
-                        <animateMotion dur="48s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="0s">
-                          <mpath href="#rp-down" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="48s" repeatCount="indefinite" calcMode="linear" begin="0s"
-                          keyTimes="0;0.012;0.020;0.024;0.032;0.065;0.073;0.094;0.102;0.179;0.187;0.204;0.212;0.339;0.347;0.363;0.371;0.419;0.427;0.445;0.453;0.543;0.551;0.569;0.577;0.677;0.685;0.706;0.714;0.886;0.894;0.900;0.908;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
-                      </g>
-
-                      {/* Ship 2 — downstream, small */}
-                      <g>
                         <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,-2.5; 0,-2.15; 0,-2.5; 0,-2.85; 0,-2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="13s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -3 0 L -2.6 -1.1 L 0.75 -1.1 L 2.6 -0.6 L 3 0 L 2.6 0.6 L 0.75 1.1 L -2.6 1.1 Z" fill="#1e3a5f" />
-                          <rect x="-1.1" y="-0.6" width="1.65" height="1.2" rx="0.2" fill="#2d5280" />
+                          <use href="#ship-small" />
+                          <animateMotion dur="64s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-21s">
+                            <mpath href="#ship-path-down" />
+                          </animateMotion>
+                          <animate
+                            attributeName="opacity"
+                            dur="64s"
+                            repeatCount="indefinite"
+                            calcMode="linear"
+                            begin="-21s"
+                            keyTimes="0;0.012;0.016;0.024;0.028;0.065;0.069;0.094;0.098;0.179;0.183;0.204;0.208;0.339;0.343;0.363;0.367;0.419;0.423;0.445;0.449;0.543;0.547;0.569;0.573;0.677;0.681;0.706;0.710;0.886;0.890;0.900;0.904;1"
+                            values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
+                          />
                         </g>
-                        <animateMotion dur="48s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-8s">
-                          <mpath href="#rp-down" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="48s" repeatCount="indefinite" calcMode="linear" begin="-8s"
-                          keyTimes="0;0.012;0.020;0.024;0.032;0.065;0.073;0.094;0.102;0.179;0.187;0.204;0.212;0.339;0.347;0.363;0.371;0.419;0.427;0.445;0.453;0.543;0.551;0.569;0.577;0.677;0.685;0.706;0.714;0.886;0.894;0.900;0.908;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
-                      </g>
-
-                      {/* Ship 3 — downstream, medium */}
-                      <g>
                         <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,-2.5; 0,-2.8; 0,-2.5; 0,-2.2; 0,-2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="21s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -3.75 0 L -3.15 -1.35 L 1.05 -1.35 L 3.15 -0.7 L 3.75 0 L 3.15 0.7 L 1.05 1.35 L -3.15 1.35 Z" fill="#2e4057" />
-                          <rect x="-1.35" y="-0.75" width="1.95" height="1.5" rx="0.25" fill="#3d5a7a" />
+                          <use href="#ship-medium" />
+                          <animateMotion dur="72s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-18s">
+                            <mpath href="#ship-path-up" />
+                          </animateMotion>
+                          <animate
+                            attributeName="opacity"
+                            dur="72s"
+                            repeatCount="indefinite"
+                            calcMode="linear"
+                            begin="-18s"
+                            keyTimes="0;0.084;0.088;0.114;0.118;0.278;0.282;0.323;0.327;0.415;0.419;0.457;0.461;0.539;0.543;0.581;0.585;0.621;0.625;0.661;0.665;0.780;0.784;0.821;0.825;0.890;0.894;0.935;0.939;0.960;0.964;0.988;0.992;1"
+                            values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
+                          />
                         </g>
-                        <animateMotion dur="48s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-16s">
-                          <mpath href="#rp-down" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="48s" repeatCount="indefinite" calcMode="linear" begin="-16s"
-                          keyTimes="0;0.012;0.020;0.024;0.032;0.065;0.073;0.094;0.102;0.179;0.187;0.204;0.212;0.339;0.347;0.363;0.371;0.419;0.427;0.445;0.453;0.543;0.551;0.569;0.577;0.677;0.685;0.706;0.714;0.886;0.894;0.900;0.908;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
-                      </g>
-
-                      {/* Ship 4 — downstream, large */}
-                      <g>
-                        <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,-2.5; 0,-2.2; 0,-2.5; 0,-2.85; 0,-2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="19s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -4.1 0 L -3.4 -1.5 L 1.2 -1.5 L 3.4 -0.75 L 4.1 0 L 3.4 0.75 L 1.2 1.5 L -3.4 1.5 Z" fill="#2e4057" />
-                          <rect x="-1.5" y="-0.8" width="2.2" height="1.6" rx="0.3" fill="#3d5a7a" />
-                        </g>
-                        <animateMotion dur="48s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-24s">
-                          <mpath href="#rp-down" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="48s" repeatCount="indefinite" calcMode="linear" begin="-24s"
-                          keyTimes="0;0.012;0.020;0.024;0.032;0.065;0.073;0.094;0.102;0.179;0.187;0.204;0.212;0.339;0.347;0.363;0.371;0.419;0.427;0.445;0.453;0.543;0.551;0.569;0.577;0.677;0.685;0.706;0.714;0.886;0.894;0.900;0.908;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
-                      </g>
-
-                      {/* Ship 5 — downstream, small */}
-                      <g>
-                        <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,-2.5; 0,-2.85; 0,-2.5; 0,-2.15; 0,-2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="15s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -3 0 L -2.6 -1.1 L 0.75 -1.1 L 2.6 -0.6 L 3 0 L 2.6 0.6 L 0.75 1.1 L -2.6 1.1 Z" fill="#1e3a5f" />
-                          <rect x="-1.1" y="-0.6" width="1.65" height="1.2" rx="0.2" fill="#2d5280" />
-                        </g>
-                        <animateMotion dur="48s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-32s">
-                          <mpath href="#rp-down" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="48s" repeatCount="indefinite" calcMode="linear" begin="-32s"
-                          keyTimes="0;0.012;0.020;0.024;0.032;0.065;0.073;0.094;0.102;0.179;0.187;0.204;0.212;0.339;0.347;0.363;0.371;0.419;0.427;0.445;0.453;0.543;0.551;0.569;0.577;0.677;0.685;0.706;0.714;0.886;0.894;0.900;0.908;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
-                      </g>
-
-                      {/* Ship 6 — downstream, medium */}
-                      <g>
-                        <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,-2.5; 0,-2.2; 0,-2.5; 0,-2.8; 0,-2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="23s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -3.75 0 L -3.15 -1.35 L 1.05 -1.35 L 3.15 -0.7 L 3.75 0 L 3.15 0.7 L 1.05 1.35 L -3.15 1.35 Z" fill="#263b52" />
-                          <rect x="-1.35" y="-0.75" width="1.95" height="1.5" rx="0.25" fill="#365472" />
-                        </g>
-                        <animateMotion dur="48s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-40s">
-                          <mpath href="#rp-down" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="48s" repeatCount="indefinite" calcMode="linear" begin="-40s"
-                          keyTimes="0;0.012;0.020;0.024;0.032;0.065;0.073;0.094;0.102;0.179;0.187;0.204;0.212;0.339;0.347;0.363;0.371;0.419;0.427;0.445;0.453;0.543;0.551;0.569;0.577;0.677;0.685;0.706;0.714;0.886;0.894;0.900;0.908;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
-                      </g>
-
-                      {/* Ship 7 — upstream, medium */}
-                      <g>
-                        <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,2.5; 0,2.85; 0,2.5; 0,2.15; 0,2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="18s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -3.75 0 L -3.15 -1.35 L 1.05 -1.35 L 3.15 -0.7 L 3.75 0 L 3.15 0.7 L 1.05 1.35 L -3.15 1.35 Z" fill="#2e4057" />
-                          <rect x="-1.35" y="-0.75" width="1.95" height="1.5" rx="0.25" fill="#3d5a7a" />
-                        </g>
-                        <animateMotion dur="58s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="0s">
-                          <mpath href="#rp-up" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="58s" repeatCount="indefinite" calcMode="linear" begin="0s"
-                          keyTimes="0;0.084;0.092;0.114;0.122;0.278;0.286;0.323;0.331;0.415;0.423;0.457;0.465;0.539;0.547;0.581;0.589;0.621;0.629;0.661;0.669;0.780;0.788;0.821;0.829;0.890;0.898;0.935;0.943;0.960;0.968;0.988;0.996;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
-                      </g>
-
-                      {/* Ship 8 — upstream, small */}
-                      <g>
-                        <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,2.5; 0,2.15; 0,2.5; 0,2.85; 0,2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="14s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -3 0 L -2.6 -1.1 L 0.75 -1.1 L 2.6 -0.6 L 3 0 L 2.6 0.6 L 0.75 1.1 L -2.6 1.1 Z" fill="#1e3a5f" />
-                          <rect x="-1.1" y="-0.6" width="1.65" height="1.2" rx="0.2" fill="#2d5280" />
-                        </g>
-                        <animateMotion dur="58s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-14s">
-                          <mpath href="#rp-up" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="58s" repeatCount="indefinite" calcMode="linear" begin="-14s"
-                          keyTimes="0;0.084;0.092;0.114;0.122;0.278;0.286;0.323;0.331;0.415;0.423;0.457;0.465;0.539;0.547;0.581;0.589;0.621;0.629;0.661;0.669;0.780;0.788;0.821;0.829;0.890;0.898;0.935;0.943;0.960;0.968;0.988;0.996;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
-                      </g>
-
-                      {/* Ship 9 — upstream, large */}
-                      <g>
-                        <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,2.5; 0,2.8; 0,2.5; 0,2.2; 0,2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="22s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -4.1 0 L -3.4 -1.5 L 1.2 -1.5 L 3.4 -0.75 L 4.1 0 L 3.4 0.75 L 1.2 1.5 L -3.4 1.5 Z" fill="#2e4057" />
-                          <rect x="-1.5" y="-0.8" width="2.2" height="1.6" rx="0.3" fill="#3d5a7a" />
-                        </g>
-                        <animateMotion dur="58s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-29s">
-                          <mpath href="#rp-up" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="58s" repeatCount="indefinite" calcMode="linear" begin="-29s"
-                          keyTimes="0;0.084;0.092;0.114;0.122;0.278;0.286;0.323;0.331;0.415;0.423;0.457;0.465;0.539;0.547;0.581;0.589;0.621;0.629;0.661;0.669;0.780;0.788;0.821;0.829;0.890;0.898;0.935;0.943;0.960;0.968;0.988;0.996;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
-                      </g>
-
-                      {/* Ship 10 — upstream, medium */}
-                      <g>
-                        <g>
-                          <animateTransform attributeName="transform" type="translate"
-                            values="0,2.5; 0,2.2; 0,2.5; 0,2.8; 0,2.5"
-                            keyTimes="0;0.25;0.5;0.75;1" dur="20s" repeatCount="indefinite"
-                            calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
-                          <path d="M -3.75 0 L -3.15 -1.35 L 1.05 -1.35 L 3.15 -0.7 L 3.75 0 L 3.15 0.7 L 1.05 1.35 L -3.15 1.35 Z" fill="#263b52" />
-                          <rect x="-1.35" y="-0.75" width="1.95" height="1.5" rx="0.25" fill="#365472" />
-                        </g>
-                        <animateMotion dur="58s" repeatCount="indefinite" rotate="auto" calcMode="paced" begin="-43s">
-                          <mpath href="#rp-up" />
-                        </animateMotion>
-                        <animate attributeName="opacity" dur="58s" repeatCount="indefinite" calcMode="linear" begin="-43s"
-                          keyTimes="0;0.084;0.092;0.114;0.122;0.278;0.286;0.323;0.331;0.415;0.423;0.457;0.465;0.539;0.547;0.581;0.589;0.621;0.629;0.661;0.669;0.780;0.788;0.821;0.829;0.890;0.898;0.935;0.943;0.960;0.968;0.988;0.996;1"
-                          values="1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1;0;0;1;1"
-                        />
                       </g>
                     </svg>
                   </div>
