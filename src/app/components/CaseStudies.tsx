@@ -4,6 +4,8 @@ import { caseStudies } from "../content/homeContent";
 import antarcticaImg800 from "@/assets/antarctica-800.webp";
 import antarcticaImg1200 from "@/assets/antarctica-1200.webp";
 
+type Study = (typeof caseStudies)[number];
+
 function OGCVisual({ badge, metric }: { badge: string; metric: string }) {
   return (
     <div className="cs-visual" style={{ background: "linear-gradient(135deg, #05102a 0%, #0a1e4a 50%, #0d2860 100%)" }}>
@@ -223,6 +225,7 @@ function AntarcticaVisual({ badge, metric }: { badge: string; metric: string }) 
         alt=""
         loading="lazy"
         decoding="async"
+        draggable={false}
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "center 25%" }}
@@ -727,6 +730,7 @@ export function CaseStudies() {
   };
 
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
     isDraggingRef.current = true;
     setIsDragging(true);
     dragOrigin.current = { x: e.pageX, scrollLeft: trackRef.current?.scrollLeft ?? 0 };
@@ -741,6 +745,27 @@ export function CaseStudies() {
   const onDragEnd = () => {
     isDraggingRef.current = false;
     setIsDragging(false);
+  };
+
+  const renderVisual = (study: Study) => {
+    const props = { badge: study.badge, metric: study.metric };
+
+    switch (study.visual) {
+      case "ogc":
+        return <OGCVisual {...props} />;
+      case "urban":
+        return <UrbanVisual {...props} />;
+      case "antarctica":
+        return <AntarcticaVisual {...props} />;
+      case "sustainability":
+        return <SustainabilityVisual {...props} />;
+      case "emr":
+        return <EMRVisual {...props} />;
+      case "esb":
+        return <ESBVisual {...props} />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -763,21 +788,21 @@ export function CaseStudies() {
           <div
             ref={trackRef}
             className="cs-grid"
-            onMouseDown={onMouseDown}
             onMouseMove={onMouseMove}
             onMouseUp={onDragEnd}
             onMouseLeave={onDragEnd}
             onScroll={onScroll}
-            style={{ cursor: isDragging ? "grabbing" : "grab", userSelect: isDragging ? "none" : undefined }}
+            style={{ cursor: isDragging ? "grabbing" : undefined, userSelect: isDragging ? "none" : undefined }}
           >
             {tripled.map((study, i) => (
               <article key={i} className="cs-card">
-                {study.visual === "ogc" && <OGCVisual badge={study.badge} metric={study.metric} />}
-                {study.visual === "urban" && <UrbanVisual badge={study.badge} metric={study.metric} />}
-                {study.visual === "antarctica" && <AntarcticaVisual badge={study.badge} metric={study.metric} />}
-                {study.visual === "sustainability" && <SustainabilityVisual badge={study.badge} metric={study.metric} />}
-                {study.visual === "emr" && <EMRVisual badge={study.badge} metric={study.metric} />}
-                {study.visual === "esb" && <ESBVisual badge={study.badge} metric={study.metric} />}
+                <div
+                  className={`cs-visual-drag${isDragging ? " is-dragging" : ""}`}
+                  onMouseDown={onMouseDown}
+                  onDragStart={(e) => e.preventDefault()}
+                >
+                  {renderVisual(study)}
+                </div>
 
                 <div className="cs-body">
                   <h3>{study.title}</h3>

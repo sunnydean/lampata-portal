@@ -483,7 +483,6 @@
     scrollbar-width: none;
     padding: 12px 12px 18px;
     margin: -12px -12px -18px;
-    cursor: grab;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
   }
@@ -554,6 +553,15 @@
     flex-shrink: 0;
     height: 260px;
     overflow: hidden;
+  }
+
+  .cs-visual-drag {
+    cursor: grab;
+    user-select: none;
+  }
+
+  .cs-visual-drag.is-dragging {
+    cursor: grabbing;
   }
 
   .cs-heat {
