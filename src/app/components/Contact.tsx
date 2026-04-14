@@ -1,6 +1,8 @@
 import type { ChangeEvent, FormEvent } from "react";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { ArrowRight, ExternalLink, Mail, MapPin } from "lucide-react";
+import { useOneShotIntersection } from "../hooks/useOneShotIntersection";
+import { buildStructuredMailtoHref } from "../lib/mailto";
 import { Reveal } from "./Reveal";
 
 const OfficeMap = lazy(() =>
@@ -22,31 +24,7 @@ export function Contact() {
     email: "",
     message: "",
   });
-  const [shouldLoadMap, setShouldLoadMap] = useState(false);
-
-  useEffect(() => {
-    const mapSlot = mapSlotRef.current;
-
-    if (!mapSlot || shouldLoadMap) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setShouldLoadMap(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "220px" },
-    );
-
-    observer.observe(mapSlot);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [shouldLoadMap]);
+  const shouldLoadMap = useOneShotIntersection(mapSlotRef, { rootMargin: "220px" });
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -58,18 +36,17 @@ export function Contact() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const subjectSource = formData.organization || formData.name || "New enquiry";
-    const subject = `Lampata enquiry - ${subjectSource}`;
-    const body = [
-      `Name: ${formData.name || "Not provided"}`,
-      `Organization: ${formData.organization || "Not provided"}`,
-      `Email: ${formData.email || "Not provided"}`,
-      "",
-      "Project summary:",
-      formData.message || "Not provided",
-    ].join("\n");
-
-    window.location.href = `mailto:contact@lampata.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = buildStructuredMailtoHref({
+      fields: [
+        { label: "Name", value: formData.name },
+        { label: "Organization", value: formData.organization },
+        { label: "Email", value: formData.email },
+      ],
+      subjectPrefix: "Lampata enquiry - ",
+      subjectSource: formData.organization || formData.name,
+      summaryLabel: "Project summary:",
+      summaryValue: formData.message,
+    });
   }
 
   const mapFallback = (

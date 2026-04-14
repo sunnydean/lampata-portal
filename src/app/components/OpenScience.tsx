@@ -1,12 +1,14 @@
 import { ArrowUpRight, Building2, FlaskConical, Landmark, Leaf } from "lucide-react";
 import { lazy, Suspense, useState } from "react";
-import morphotopesMap from "../../assets/morphotopes_map.svg";
-import urbanBackgroundResearch from "../../assets/urban_background_research.webp";
+import urbanBackgroundResearch720 from "../../assets/open-science/urban-background-research-720.jpg";
+import urbanBackgroundResearch960 from "../../assets/open-science/urban-background-research-960.jpg";
+import urbanBackgroundResearch1440 from "../../assets/open-science/urban-background-research-1440.jpg";
 import {
   audienceSegments,
   featuredPublications,
   openScienceItems,
 } from "../content/homeContent";
+import { withBasePath } from "../lib/paths";
 import { Reveal } from "./Reveal";
 
 const OpenScienceArchiveDialog = lazy(() =>
@@ -25,6 +27,7 @@ const audienceIconMap = {
 export function OpenScience() {
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [archiveRequested, setArchiveRequested] = useState(false);
+  const morphotopesMap = withBasePath("/open-science/morphotopes-map-authored.svg");
   const researchItem = openScienceItems.find((item) => item.icon === "research");
   const visibleFeaturedPublications = featuredPublications.slice(0, 3);
   const handleArchiveOpen = () => {
@@ -39,10 +42,14 @@ export function OpenScience() {
         className="pointer-events-none absolute left-[-13rem] top-[-5rem] h-[28rem] w-[28rem] overflow-hidden rounded-full opacity-[0.18] mix-blend-multiply [mask-image:linear-gradient(90deg,#000_0%,#000_58%,rgba(0,0,0,0.62)_78%,rgba(0,0,0,0.18)_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(90deg,#000_0%,#000_58%,rgba(0,0,0,0.62)_78%,rgba(0,0,0,0.18)_92%,transparent_100%)] sm:left-[-14rem] sm:top-[-6rem] sm:h-[34rem] sm:w-[34rem] md:left-[-17rem] md:top-[-6.5rem] md:h-[42rem] md:w-[42rem] lg:left-[-19rem] lg:top-[-7rem] lg:h-[48rem] lg:w-[48rem] xl:left-[-21rem] xl:top-[-7.5rem] xl:h-[54rem] xl:w-[54rem]"
       >
         <img
-          src={urbanBackgroundResearch}
+          src={urbanBackgroundResearch1440}
+          srcSet={`${urbanBackgroundResearch720} 720w, ${urbanBackgroundResearch960} 960w, ${urbanBackgroundResearch1440} 1440w`}
           alt=""
+          width={1440}
+          height={1433}
           loading="lazy"
           decoding="async"
+          sizes="(max-width: 640px) 448px, (max-width: 1024px) 672px, 864px"
           className="h-full w-full -rotate-[7deg] object-cover saturate-[1.1] contrast-[1.04] scale-[1.03]"
         />
       </div>
@@ -54,12 +61,11 @@ export function OpenScience() {
               <div className="panel-surface h-full overflow-hidden rounded-[0.75rem]">
                 <div className="grid h-full lg:grid-rows-[0.8fr_0.2fr]">
                   <div className="relative min-h-[31rem] overflow-hidden bg-[#f7f9fc] sm:min-h-[36rem]">
-                    <img
-                      src={morphotopesMap}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                      className="absolute inset-0 h-full w-full object-cover object-center"
+                    <object
+                      data={morphotopesMap}
+                      type="image/svg+xml"
+                      aria-hidden="true"
+                      className="absolute inset-0 h-full w-full"
                     />
                     <svg
                       viewBox="0 0 669.6 378.352075"
@@ -90,7 +96,6 @@ export function OpenScience() {
                         </g>
                       </defs>
 
-                      {/* Lightweight ship overlay: five slow boats following the route centerline with simple bridge/start-stop fades. */}
                       <g opacity="0.88">
                         <g>
                           <use href="#ship-large" />

@@ -1,4 +1,5 @@
-import { type ComponentType, type LazyExoticComponent, Suspense, useEffect, useRef, useState } from "react";
+import { type ComponentType, type LazyExoticComponent, Suspense, useRef } from "react";
+import { useOneShotIntersection } from "../hooks/useOneShotIntersection";
 import { cn } from "./ui/utils";
 
 interface DeferredSectionProps {
@@ -37,45 +38,12 @@ export function DeferredSection({
   sectionId,
 }: DeferredSectionProps) {
   const ref = useRef<HTMLElement | null>(null);
-  const [isRequested, setIsRequested] = useState(false);
-  const [isReadyToRender, setIsReadyToRender] = useState(false);
-
-  useEffect(() => {
-    const element = ref.current;
-
-    if (!element || isReadyToRender) {
-      return;
-    }
-
-    const preloadObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setIsRequested(true);
-          preloadObserver.disconnect();
-        }
-      },
-      { rootMargin: preloadMargin },
-    );
-
-    const renderObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setIsRequested(true);
-          setIsReadyToRender(true);
-          renderObserver.disconnect();
-        }
-      },
-      { rootMargin: renderMargin },
-    );
-
-    preloadObserver.observe(element);
-    renderObserver.observe(element);
-
-    return () => {
-      preloadObserver.disconnect();
-      renderObserver.disconnect();
-    };
-  }, [isReadyToRender, preloadMargin, renderMargin]);
+  const isReadyToRender = useOneShotIntersection(ref, { rootMargin: renderMargin });
+  const isPreloaded = useOneShotIntersection(ref, {
+    disabled: isReadyToRender,
+    rootMargin: preloadMargin,
+  });
+  const isRequested = isPreloaded || isReadyToRender;
 
   return (
     <section id={sectionId} ref={ref} className={sectionClassName}>

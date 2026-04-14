@@ -25,6 +25,7 @@ import {
   trainingTracks,
   trainingVideos,
 } from "./content/trainingContent";
+import { buildStructuredMailtoHref } from "./lib/mailto";
 
 const trackIcons = [BookOpen, Cpu, FlaskConical, Cloud];
 const formatIcons = [UsersRound, MonitorPlay, GraduationCap];
@@ -53,21 +54,20 @@ export default function TrainingApp() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const subjectSource = formData.organization || formData.name || "New enquiry";
-    const subject = `Lampata training enquiry - ${subjectSource}`;
-    const body = [
-      `Name: ${formData.name || "Not provided"}`,
-      `Organization: ${formData.organization || "Not provided"}`,
-      `Email: ${formData.email || "Not provided"}`,
-      `Team or audience: ${formData.audience || "Not provided"}`,
-      `Preferred format: ${formData.preferredFormat || "Not provided"}`,
-      `Preferred timing: ${formData.preferredTiming || "Not provided"}`,
-      "",
-      "Training goals / topics:",
-      formData.goals || "Not provided",
-    ].join("\n");
-
-    window.location.href = `mailto:contact@lampata.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = buildStructuredMailtoHref({
+      fields: [
+        { label: "Name", value: formData.name },
+        { label: "Organization", value: formData.organization },
+        { label: "Email", value: formData.email },
+        { label: "Team or audience", value: formData.audience },
+        { label: "Preferred format", value: formData.preferredFormat },
+        { label: "Preferred timing", value: formData.preferredTiming },
+      ],
+      subjectPrefix: "Lampata training enquiry - ",
+      subjectSource: formData.organization || formData.name,
+      summaryLabel: "Training goals / topics:",
+      summaryValue: formData.goals,
+    });
   }
 
   return (

@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { lazy, Suspense, useRef, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import airflowLogo from "../../assets/logos/tech/airflow.svg";
 import awsLogo from "../../assets/logos/tech/aws.png";
 import azureLogo from "../../assets/logos/tech/azure.png";
