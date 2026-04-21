@@ -6,4 +6,5 @@ export const navItems: NavItem[] = [
   { label: "Tech Stack", href: withBasePath("/#tech-stack") },
   { label: "Case Studies", href: withBasePath("/#case-studies") },
   { label: "Open Science", href: withBasePath("/#open-science") },
+  { label: "Training", href: withBasePath("/training/") },
 ];

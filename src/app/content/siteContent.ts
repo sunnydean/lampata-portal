@@ -213,6 +213,7 @@ export interface TrainingVideo {
 
 export interface TrainingEvent {
   title: string;
+  subtitle?: string;
   date: string;
   format: string;
   status: "upcoming" | "past";

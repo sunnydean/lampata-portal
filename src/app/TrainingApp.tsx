@@ -19,6 +19,13 @@ import { SectionIntro } from "./components/SectionIntro";
 import { TrainingRoadmap } from "./components/TrainingRoadmap";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "./components/ui/dialog";
+import {
   trainingEvents,
   trainingFormats,
   trainingRoadmapCourse,
@@ -29,6 +36,7 @@ import { buildStructuredMailtoHref } from "./lib/mailto";
 
 const trackIcons = [BookOpen, Cpu, FlaskConical, Cloud];
 const formatIcons = [UsersRound, MonitorPlay, GraduationCap];
+const EVENT_PREVIEW_COUNT = 4;
 
 export default function TrainingApp() {
   const [formData, setFormData] = useState({
@@ -40,9 +48,13 @@ export default function TrainingApp() {
     preferredTiming: "",
     goals: "",
   });
+  const [upcomingEventsDialogOpen, setUpcomingEventsDialogOpen] = useState(false);
+  const [pastEventsDialogOpen, setPastEventsDialogOpen] = useState(false);
 
   const upcomingEvents = trainingEvents.filter((event) => event.status === "upcoming");
   const pastEvents = trainingEvents.filter((event) => event.status === "past");
+  const upcomingPreview = upcomingEvents.slice(0, EVENT_PREVIEW_COUNT);
+  const pastPreview = pastEvents.slice(0, EVENT_PREVIEW_COUNT);
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -69,6 +81,218 @@ export default function TrainingApp() {
       summaryValue: formData.goals,
     });
   }
+
+  const eventsSection = (
+    <section className="bg-[#f8fbff] px-6 py-22">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro
+          eyebrow="Events"
+          title="Past and upcoming training sessions."
+          description="Upcoming sessions show where Lampata will be teaching next, while past events give a sense of the topics, formats, and audiences already covered."
+        />
+
+        <div className="grid gap-8 lg:grid-cols-2">
+          <div className="panel-surface rounded-[1rem] p-6">
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <div>
+                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[#00458b]/52">
+                  Upcoming
+                </p>
+                <h3 className="mt-2 font-display text-[1.55rem] tracking-[-0.05em] text-[#00458b]">
+                  Upcoming sessions
+                </h3>
+              </div>
+              <div className="brand-gold-fill flex h-12 w-12 items-center justify-center rounded-xl text-[#00458b]">
+                <CalendarDays className="h-5 w-5" />
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              {upcomingPreview.map((event) => (
+                <article
+                  key={`${event.title}-${event.date}`}
+                  className="rounded-[0.85rem] border border-[#00458b]/9 bg-white px-4 py-4"
+                >
+                  <div className="mb-2.5 flex flex-wrap gap-2">
+                    <span className="tag-mono text-[#00458b]/82">{event.date}</span>
+                    <span className="tag-mono text-[#00458b]/82">{event.format}</span>
+                  </div>
+                  <h4 className="font-display text-[1.12rem] leading-tight tracking-[-0.04em] text-[#00458b]">
+                    {event.title}
+                  </h4>
+                  {event.subtitle ? (
+                    <p className="mt-1.5 text-sm leading-6 text-[#00458b]/62">
+                      {event.subtitle}
+                    </p>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+
+            {upcomingEvents.length > EVENT_PREVIEW_COUNT ? (
+              <button
+                type="button"
+                onClick={() => setUpcomingEventsDialogOpen(true)}
+                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#00458b] transition-opacity hover:opacity-72"
+              >
+                See full list
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            ) : null}
+          </div>
+
+          <div className="panel-surface rounded-[1rem] p-6">
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <div>
+                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[#00458b]/52">
+                  Past
+                </p>
+                <h3 className="mt-2 font-display text-[1.55rem] tracking-[-0.05em] text-[#00458b]">
+                  Past sessions
+                </h3>
+              </div>
+              <div className="brand-gold-fill flex h-12 w-12 items-center justify-center rounded-xl text-[#00458b]">
+                <Video className="h-5 w-5" />
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              {pastPreview.map((event) => {
+                const isExternal = Boolean(event.link?.startsWith("http"));
+
+                return (
+                  <article
+                    key={`${event.title}-${event.date}`}
+                    className="rounded-[0.85rem] border border-[#00458b]/9 bg-white px-4 py-4"
+                  >
+                    <div className="mb-2.5 flex items-start justify-between gap-3">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="tag-mono text-[#00458b]/82">{event.date}</span>
+                        <span className="tag-mono text-[#00458b]/82">{event.format}</span>
+                      </div>
+                      {event.link ? (
+                        <a
+                          href={event.link}
+                          target={isExternal ? "_blank" : undefined}
+                          rel={isExternal ? "noreferrer" : undefined}
+                          className="shrink-0 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#00458b]/58 transition-opacity hover:opacity-72"
+                        >
+                          Reference
+                        </a>
+                      ) : (
+                        <span className="shrink-0 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#00458b]/46">
+                          Private
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="font-display text-[1.12rem] leading-tight tracking-[-0.04em] text-[#00458b]">
+                      {event.title}
+                    </h4>
+                  </article>
+                );
+              })}
+            </div>
+
+            {pastEvents.length > EVENT_PREVIEW_COUNT ? (
+              <button
+                type="button"
+                onClick={() => setPastEventsDialogOpen(true)}
+                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#00458b] transition-opacity hover:opacity-72"
+              >
+                See full list
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            ) : null}
+          </div>
+        </div>
+
+        <Dialog open={upcomingEventsDialogOpen} onOpenChange={setUpcomingEventsDialogOpen}>
+          <DialogContent className="max-w-3xl rounded-[1rem] border-[#00458b]/12 p-0">
+            <DialogHeader className="border-b border-[#00458b]/8 px-6 py-5">
+              <DialogTitle className="font-display text-[1.7rem] tracking-[-0.04em] text-[#00458b]">
+                Upcoming sessions
+              </DialogTitle>
+              <DialogDescription className="text-sm leading-6 text-[#00458b]/62">
+                The full list of upcoming training sessions and conference workshops.
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="max-h-[70vh] space-y-3 overflow-y-auto px-6 py-5">
+              {upcomingEvents.map((event) => (
+                <article
+                  key={`${event.title}-${event.date}-dialog`}
+                  className="rounded-[0.85rem] border border-[#00458b]/9 bg-white px-4 py-4"
+                >
+                  <div className="mb-2.5 flex flex-wrap gap-2">
+                    <span className="tag-mono text-[#00458b]/82">{event.date}</span>
+                    <span className="tag-mono text-[#00458b]/82">{event.format}</span>
+                  </div>
+                  <h4 className="font-display text-[1.12rem] leading-tight tracking-[-0.04em] text-[#00458b]">
+                    {event.title}
+                  </h4>
+                  {event.subtitle ? (
+                    <p className="mt-1.5 text-sm leading-6 text-[#00458b]/62">
+                      {event.subtitle}
+                    </p>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={pastEventsDialogOpen} onOpenChange={setPastEventsDialogOpen}>
+          <DialogContent className="max-w-3xl rounded-[1rem] border-[#00458b]/12 p-0">
+            <DialogHeader className="border-b border-[#00458b]/8 px-6 py-5">
+              <DialogTitle className="font-display text-[1.7rem] tracking-[-0.04em] text-[#00458b]">
+                Past sessions
+              </DialogTitle>
+              <DialogDescription className="text-sm leading-6 text-[#00458b]/62">
+                The full list of recent talks, workshops, tutorials, and private training delivered by Lampata.
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="max-h-[70vh] space-y-3 overflow-y-auto px-6 py-5">
+              {pastEvents.map((event) => {
+                const isExternal = Boolean(event.link?.startsWith("http"));
+
+                return (
+                  <article
+                    key={`${event.title}-${event.date}-dialog`}
+                    className="rounded-[0.85rem] border border-[#00458b]/9 bg-white px-4 py-4"
+                  >
+                    <div className="mb-2.5 flex items-start justify-between gap-3">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="tag-mono text-[#00458b]/82">{event.date}</span>
+                        <span className="tag-mono text-[#00458b]/82">{event.format}</span>
+                      </div>
+                      {event.link ? (
+                        <a
+                          href={event.link}
+                          target={isExternal ? "_blank" : undefined}
+                          rel={isExternal ? "noreferrer" : undefined}
+                          className="shrink-0 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#00458b]/58 transition-opacity hover:opacity-72"
+                        >
+                          Reference
+                        </a>
+                      ) : (
+                        <span className="shrink-0 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#00458b]/46">
+                          Private
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="font-display text-[1.12rem] leading-tight tracking-[-0.04em] text-[#00458b]">
+                      {event.title}
+                    </h4>
+                  </article>
+                );
+              })}
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </section>
+  );
 
   return (
     <div className="site-shell min-h-screen bg-background">
@@ -162,56 +386,7 @@ export default function TrainingApp() {
           </div>
         </section>
 
-        <section className="bg-white px-6 py-22">
-          <div className="mx-auto max-w-7xl">
-            <SectionIntro
-              eyebrow="Curriculum"
-              title="Four tracks teams can combine into a focused learning program."
-              description="Each track is designed to stand on its own or work as part of a tailored program, depending on whether your team needs a foundation, a workflow deep dive, or a delivery-focused training arc."
-            />
-
-            <div className="grid gap-6 lg:grid-cols-2">
-              {trainingTracks.map((track, index) => {
-                const Icon = trackIcons[index];
-
-                return (
-                  <article
-                    key={track.title}
-                    className="panel-surface card-accent rounded-[0.9rem] p-7"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="brand-gold-fill mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-[#00458b]">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[#00458b]/48">
-                          {track.audience}
-                        </p>
-                        <h3 className="mt-2 font-display text-[1.7rem] leading-tight tracking-[-0.05em] text-[#00458b]">
-                          {track.title}
-                        </h3>
-                        <p className="mt-3 text-base leading-7 text-[#00458b]/74">
-                          {track.purpose}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 grid gap-2">
-                      {track.topics.map((topic) => (
-                        <div
-                          key={topic}
-                          className="brand-gold-border-left border-l-2 pl-3 text-sm leading-6 text-[#00458b]/76"
-                        >
-                          {topic}
-                        </div>
-                      ))}
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        {eventsSection}
 
         <section className="bg-[#f8fbff] px-6 py-22">
           <div className="mx-auto max-w-7xl">
@@ -305,112 +480,6 @@ export default function TrainingApp() {
                   </div>
                 </article>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-[#f8fbff] px-6 py-22">
-          <div className="mx-auto max-w-7xl">
-            <SectionIntro
-              eyebrow="Events"
-              title="Past and upcoming training sessions."
-              description="Upcoming sessions can be used as a starting point for a request, while past events give a sense of the topics, formats, and audiences Lampata has already taught."
-            />
-
-            <div className="grid gap-8 lg:grid-cols-2">
-              <div className="panel-surface rounded-[1rem] p-7">
-                <div className="mb-6 flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[#00458b]/52">
-                      Upcoming
-                    </p>
-                    <h3 className="mt-2 font-display text-[1.8rem] tracking-[-0.05em] text-[#00458b]">
-                      Bookable sessions
-                    </h3>
-                  </div>
-                  <div className="brand-gold-fill flex h-12 w-12 items-center justify-center rounded-xl text-[#00458b]">
-                    <CalendarDays className="h-5 w-5" />
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  {upcomingEvents.map((event) => (
-                    <article
-                      key={`${event.title}-${event.date}`}
-                      className="rounded-[0.9rem] border border-[#00458b]/9 bg-white p-5"
-                    >
-                      <div className="mb-3 flex flex-wrap gap-2">
-                        <span className="tag-mono text-[#00458b]/82">{event.date}</span>
-                        <span className="tag-mono text-[#00458b]/82">{event.format}</span>
-                      </div>
-                      <h4 className="font-display text-[1.3rem] leading-tight tracking-[-0.04em] text-[#00458b]">
-                        {event.title}
-                      </h4>
-                      {event.link ? (
-                        <a
-                          href={event.link}
-                          className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#00458b] transition-opacity hover:opacity-72"
-                        >
-                          Request this training
-                          <ArrowRight className="h-4 w-4" />
-                        </a>
-                      ) : null}
-                    </article>
-                  ))}
-                </div>
-              </div>
-
-              <div className="panel-surface rounded-[1rem] p-7">
-                <div className="mb-6 flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[#00458b]/52">
-                      Past
-                    </p>
-                    <h3 className="mt-2 font-display text-[1.8rem] tracking-[-0.05em] text-[#00458b]">
-                      Delivered sessions
-                    </h3>
-                  </div>
-                  <div className="brand-gold-fill flex h-12 w-12 items-center justify-center rounded-xl text-[#00458b]">
-                    <Video className="h-5 w-5" />
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  {pastEvents.map((event) => {
-                    const isExternal = Boolean(event.link?.startsWith("http"));
-
-                    return (
-                      <article
-                        key={`${event.title}-${event.date}`}
-                        className="rounded-[0.9rem] border border-[#00458b]/9 bg-white p-5"
-                      >
-                        <div className="mb-3 flex flex-wrap gap-2">
-                          <span className="tag-mono text-[#00458b]/82">{event.date}</span>
-                          <span className="tag-mono text-[#00458b]/82">{event.format}</span>
-                        </div>
-                        <h4 className="font-display text-[1.3rem] leading-tight tracking-[-0.04em] text-[#00458b]">
-                          {event.title}
-                        </h4>
-                        {event.link ? (
-                          <a
-                            href={event.link}
-                            target={isExternal ? "_blank" : undefined}
-                            rel={isExternal ? "noreferrer" : undefined}
-                            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#00458b] transition-opacity hover:opacity-72"
-                          >
-                            View reference
-                            <ExternalLink className="h-4 w-4" />
-                          </a>
-                        ) : (
-                          <p className="mt-4 text-sm leading-6 text-[#00458b]/56">
-                            Delivered as a private Lampata training session.
-                          </p>
-                        )}
-                      </article>
-                    );
-                  })}
-                </div>
-              </div>
             </div>
           </div>
         </section>

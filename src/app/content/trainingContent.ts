@@ -123,18 +123,32 @@ export const trainingVideos: TrainingVideo[] = [
 
 export const trainingEvents: TrainingEvent[] = [
   {
-    title: "Earth Observation Open Science Bootcamp",
-    date: "September 17, 2026",
-    format: "Virtual live workshop",
+    title: "GISRUK",
+    subtitle: "Pangeo Training",
+    date: "April 14-17, 2026",
+    format: "Birmingham",
     status: "upcoming",
-    link: "#request-training",
   },
   {
-    title: "Geo-spatial AI for Sustainability Teams",
-    date: "November 12, 2026",
-    format: "Cambridge, UK + online",
+    title: "EGU",
+    subtitle: "Cloud-Native Geospatial",
+    date: "May 3-8, 2026",
+    format: "Vienna",
     status: "upcoming",
-    link: "#request-training",
+  },
+  {
+    title: "StatEO",
+    subtitle: "EarthCODE Workshop",
+    date: "May 5-7, 2026",
+    format: "Frascati",
+    status: "upcoming",
+  },
+  {
+    title: "AGILE Workshop",
+    subtitle: "Cloud-Native Geospatial Workshop",
+    date: "June 16-19, 2026",
+    format: "Tartu",
+    status: "upcoming",
   },
   {
     title: "Reproducible EO Workflows for Research Teams",

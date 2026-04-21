@@ -1,7 +1,7 @@
 import { cn } from "./ui/utils";
 
 interface SectionIntroProps {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center" | "right";
@@ -32,16 +32,18 @@ export function SectionIntro({
         className,
       )}
     >
-      <span
-        className={cn(
-          "section-eyebrow",
-          eyebrowLeftAligned && "self-start",
-          eyebrowCentered && "self-center",
-          eyebrowRightAligned && "self-end",
-        )}
-      >
-        {eyebrow}
-      </span>
+      {eyebrow ? (
+        <span
+          className={cn(
+            "section-eyebrow",
+            eyebrowLeftAligned && "self-start",
+            eyebrowCentered && "self-center",
+            eyebrowRightAligned && "self-end",
+          )}
+        >
+          {eyebrow}
+        </span>
+      ) : null}
       <h2 className="section-title max-w-4xl text-balance">{title}</h2>
       {description ? <p className="section-copy">{description}</p> : null}
     </div>
